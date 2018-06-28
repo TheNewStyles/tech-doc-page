@@ -4,9 +4,14 @@ class Code extends Component {
     render() {
       return (
             // layout / style 
-            <div>
-                <code>{this.props.code}</code>
-            </div>
+            <figure>
+            <figcaption>{this.props.codeCaption}</figcaption>
+                <pre>
+                    <code contentEditable spellCheck="false">
+                        {this.props.code}
+                    </code>
+                </pre>
+            </figure>
         );
     }
 }
