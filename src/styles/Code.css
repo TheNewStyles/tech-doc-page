@@ -1,0 +1,19 @@
+pre, code {
+    font-family: monospace;
+}
+
+pre {
+    overflow: auto;
+    tab-size:4;
+    border-radius: 0.5em;
+}
+
+pre > code {
+    padding: 1em;
+    margin: 1em;
+    word-wrap: normal;
+}
+
+.linenums li {
+    list-style-type: decimal;
+}

@@ -5,7 +5,7 @@ class List extends Component {
       return (
             // look up the best way to create dynamic list in React
             <ul>
-                <li>HI</li>
+                <li>list item</li>
             </ul>
         );
     }

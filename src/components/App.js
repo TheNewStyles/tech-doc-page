@@ -11,19 +11,15 @@ import Code from './Code';
 class App extends Component {
   render() {
     this.code = 
-              `
-              public static void MyClassInitialize(TestContext testContext)
-              {
-                ITCommon.UserManagement.AutoRefreshAuthorizationCache = false;
+`public static void MyClassInitialize(TestContext testContext)
+{
+  ITCommon.UserManagement.AutoRefreshAuthorizationCache = false;
 
-                _classBucket = new ITCommon.TestBucket();
+  _classBucket = new ITCommon.TestBucket();
 
-                _carrier = ITCommon.CarrierManagement.SetupLotsaTruckingCarrier();
-                _classBucket.TakeOwnershipOfCarrier(_carrier);
-              }
-              `
-
-
+  _carrier = ITCommon.CarrierManagement.SetupLotsaTruckingCarrier();
+  _classBucket.TakeOwnershipOfCarrier(_carrier);
+}`
     return (
       <div>          
         <NavBar />            
@@ -38,7 +34,7 @@ class App extends Component {
               <SectionHeader title="ES6" />
               <Paragraph text="This is something meaninful about ES6." />
               <List /> {/* how to create a ul li's dynamically   */}
-              <Code codeCaption="test" code={this.code} />
+              <Code codeCaption="Code Snippet Title" code={this.code} />
           </section>    
         </main>        
       </div>
