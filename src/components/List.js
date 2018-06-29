@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 
-class List extends Component {
+class List extends Component {    
+    constructor(props) {
+        super(props);
+        const listItems = this.props.listItems; 
+        this.list = listItems.map((listItems) =>
+            <li>{listItems}</li>
+        );
+    }
+
     render() {
-      return (
-            // look up the best way to create dynamic list in React
+        return (
             <ul>
-                <li>list item</li>
+                {this.list}
             </ul>
         );
     }
