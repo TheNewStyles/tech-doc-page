@@ -22,13 +22,7 @@ class App extends Component {
 }`
     return (
       <div>          
-        <NavBar />            
-
-        {/* make main-section component. can i pass other components to the main? */}
-          {/* Title just title and correct size/layout */}
-        {/* make code component */}
-        {/* make list component */}
-        {/* add lists and code as needed */}
+        <NavBar />        
         <main id="main-doc">
           <section id="" className="main-section">
               <SectionHeader title="ES6" />
