@@ -5,7 +5,7 @@ class List extends Component {
         super(props);
         const listItems = this.props.listItems; 
         this.list = listItems.map((listItems) =>
-            <li>{listItems}</li>
+            <li key={listItems} >{listItems}</li>
         );
     }
 

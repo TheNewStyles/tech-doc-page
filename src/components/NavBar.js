@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 
 import NavLink from './NavLink';
+import '../styles/NavBar.css';
 
 class NavBar extends Component {
     constructor() {
         super();
-        const numbers = [1, 2, 3, 4, 5]; // make a dictionary to match these together?
-        const sectionIds = ["#intro", "#blah"]; //Add #id tages for each section to nav to 
-        this.listItems = numbers.map((numbers) =>
-            <NavLink key={numbers} href={sectionIds} test={numbers} />
+        let dict = this.populateDictionary();
+        this.listItems = dict.map((dict, i) =>
+            <NavLink key={dict.key} href={dict.value} test={dict.value} />
         );
     }
+
+    populateDictionary() {
+        const hrefs = ["#intro", "#blah"];
+        let dict = []; 
+
+        hrefs.forEach(function (href, index) {
+            dict.push({
+                key: index,
+                value: href
+            });
+        });
+
+        return dict;
+    } 
 
     render() {
         return (
