@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import '../styles/Paragraph.css';
+
 class Paragraph extends Component {
     render() {
       return (

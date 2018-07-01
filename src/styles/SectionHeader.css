@@ -1,3 +1,7 @@
 header h2 {
     padding-left: 0.5em;
+    border-top: 1px solid #ececec;
+    margin-top: 44px;
+    padding-top: 40px;
+    line-height: 1.2;
 }
