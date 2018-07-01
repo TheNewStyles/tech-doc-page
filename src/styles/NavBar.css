@@ -4,9 +4,14 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-items: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .nav-link {
     text-decoration: none;
+    padding-left: 1em;
+}
+
+#navbar h2 {
+    padding-left: 0.5em;
 }

@@ -13,16 +13,21 @@ class App extends Component {
 
     return (
       <div>          
-        <NavBar />        
+        <NavBar title="React Documentation" />        
         <main id="main-doc">
-          <section id="" className="main-section">
-              <SectionHeader title="ES6" />
-              <Paragraph text="This is something meaninful about ES6." />
-              <List listItems={["one", "two", "three"]} /> 
-              <List listItems={["chode", "george", "roscoe"]} /> 
-              <Code codeCaption="Code Snippet Title" code={this.code[0]} />
-              <Code codeCaption="My new code section" code={this.code[1]} />
-          </section>    
+            <section id="hello-world" className="main-section">
+                <SectionHeader title="React - Hello World" />
+                <Code codeCaption="The smallest React example looks like this:" code={this.code[0]} />
+                <Paragraph text="It displays a heading saying “Hello, world!” on the page." />
+            </section>
+            <section id="" className="main-section">
+                <SectionHeader title="Next Chaper - test" />
+                <Paragraph text="This is something meaninful about ES6." />
+                <List listItems={["one", "two", "three"]} /> 
+                <List listItems={["chode", "george", "roscoe"]} /> 
+                <Code codeCaption="Code Snippet Title" code={this.code[0]} />
+                <Code codeCaption="My new code section" code={this.code[1]} />
+            </section>    
         </main>        
       </div>
     );
@@ -30,15 +35,11 @@ class App extends Component {
 
        
 code = [
-`public static void MyClassInitialize(TestContext testContext)
-{
-  ITCommon.UserManagement.AutoRefreshAuthorizationCache = false;
-
-  _classBucket = new ITCommon.TestBucket();
-
-  _carrier = ITCommon.CarrierManagement.SetupLotsaTruckingCarrier();
-  _classBucket.TakeOwnershipOfCarrier(_carrier);
-} `,
+`ReactDOM.render(
+    <h1>Hello, world!</h1>,
+    document.getElementById('root')
+);
+`,
 `public static void MyClassInitialize(TestContext testContext)
 {
   ITCommon.UserManagement.AutoRefreshAuthorizationCache = false;

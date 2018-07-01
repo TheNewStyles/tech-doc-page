@@ -30,7 +30,7 @@ class NavBar extends Component {
         return (
             <nav id="navbar">
                 <header>
-                    <h2>ES6 Documentation</h2>
+                    <h2>{this.props.title}</h2>
                 </header>          
                 {this.listItems}
             </nav> 
