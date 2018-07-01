@@ -29,7 +29,9 @@ class NavBar extends Component {
     render() {
         return (
             <nav id="navbar">
-                <header>ES6 Documentation</header>          
+                <header>
+                    <h2>ES6 Documentation</h2>
+                </header>          
                 {this.listItems}
             </nav> 
         );
