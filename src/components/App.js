@@ -20,9 +20,9 @@ class App extends Component {
             <section id="hello-world" className="main-section">
                 <header>
                     <h1>React Documentation</h1>
+                    <Paragraph text="This documentation was created from https://reactjs.org/docs" />
                 </header>
-                <SectionHeader id="hw-header" title="Hello World" />
-                <Paragraph text="This documentation was created from https://reactjs.org/docs" />
+                <SectionHeader id="hw-header" title="Hello World" />                
                 <Code codeCaption="The smallest React example looks like this:" code={this.code[0]} />
                 <Paragraph text="It displays a heading saying “Hello, world!” on the page." />
                 <ExternalLink link="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
@@ -43,13 +43,13 @@ class App extends Component {
                     <SectionHeader title="Let's Get Started!" />
                     <Paragraph text={["Keep scrolling down, and you’ll find the ", <a href="#introducing-jsx">link to the next chapter</a> ," of this guide right before the website footer."]} />
                 </article>  
-            </section>              
-            {/* <section>
-                <List listItems={["one", "two", "three"]} /> 
-                <List listItems={["chode", "george", "roscoe"]} /> 
-                <Code codeCaption="Code Snippet Title" code={this.code[0]} />
-                <Code codeCaption="My new code section" code={this.code[1]} />
-            </section> */}
+            </section>     
+            <section id="introducing-jsx" className="main-section">
+                <h1>Introducing JSX</h1> 
+                <Code codeCaption="Consider this variable declaration:" code={this.code[1]} />  
+                <Paragraph text="This funny tag syntax is neither a string nor HTML." /> 
+                <Paragraph text="It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript." />
+            </section>         
         </main>        
       </div>
     );
@@ -62,15 +62,7 @@ code = [
     document.getElementById('root')
 );
 `,
-`public static void MyClassInitialize(TestContext testContext)
-{
-  ITCommon.UserManagement.AutoRefreshAuthorizationCache = false;
-
-  _classBucket = new ITCommon.TestBucket();
-
-  _carrier = ITCommon.CarrierManagement.SetupLotsaTruckingCarrier();
-  _classBucket.TakeOwnershipOfCarrier(_carrier);
-} `
+`const element = <h1>Hello, world!</h1>;`
 ];
 
 

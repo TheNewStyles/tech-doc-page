@@ -4,4 +4,9 @@ p {
 
 p a {
     padding-left: 0;
+    font-weight: bolder;
+    background-color: #bbeffd;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    color: #1a1a1a;
+    text-decoration: none;
 }
