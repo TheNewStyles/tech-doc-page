@@ -19,7 +19,7 @@ class App extends Component {
         <main id="main-doc">
             <section id="hello-world" className="main-section">
                 <header>
-                    <h1>React Documentation</h1>
+                    <h1 id="react-doc-title">React Documentation</h1>
                     <Paragraph text="This documentation was created from https://reactjs.org/docs" />
                 </header>
                 <SectionHeader id="hw-header" title="Hello World" />                
@@ -49,7 +49,11 @@ class App extends Component {
                 <Code codeCaption="Consider this variable declaration:" code={this.code[1]} />  
                 <Paragraph text="This funny tag syntax is neither a string nor HTML." /> 
                 <Paragraph text="It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript." />
-            </section>         
+                <Paragraph text={["JSX produces React “elements”. We will explore rendering them to the DOM in the ", <a href="#rendering-elements">next section.</a>  ," Below, you can find the basics of JSX necessary to get you started."]} />
+                <SectionHeader title="Why JSX?" />
+                <Paragraph text="React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display." />
+                <Paragraph text={["Instead of artificially separating technologies by putting markup and logic in separate files, React " , <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separates concerns</a>  , " with loosely coupled units called “components” that contain both. We will come back to components in a " , <a href="#components-and-props">further section</a>  , " but if you’re not yet comfortable putting markup in JS, " , <a href="https://www.youtube.com/watch?v=x7cQ3mrcKaY">this talk</a>  , " might convince you otherwise."]} />
+            </section>     
         </main>        
       </div>
     );
