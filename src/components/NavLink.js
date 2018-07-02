@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+import '../styles/NavLink.css';
+
 class NavLink extends Component {
     render() {
       return (
-          <a className="nav-link" href={this.props.href}>{this.props.test}</a>
+          <li>
+            <a className="nav-link" href={this.props.href}>{this.props.number}. {this.props.text}</a>
+          </li>          
         );
     }
 }

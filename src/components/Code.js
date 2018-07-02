@@ -5,9 +5,8 @@ import '../styles/Code.css';
 class Code extends Component {
     render() {
       return (
-            // layout / style 
-            <figure>
-            <figcaption>{this.props.codeCaption}</figcaption>
+            <figure className="code">
+                <figcaption>{this.props.codeCaption}</figcaption>
                 <pre className="prettyprint linenums:1" >
                     <code contentEditable spellCheck="false" suppressContentEditableWarning="true">
                         {this.props.code}

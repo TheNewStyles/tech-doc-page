@@ -8,18 +8,20 @@ class NavBar extends Component {
         super();
         let dict = this.populateDictionary();
         this.listItems = dict.map((dict, i) =>
-            <NavLink key={dict.key} href={dict.value} test={dict.value} />
+            <NavLink number={dict.index+1} key={dict.key} href={dict.value} text={dict.key} />
         );
     }
 
     populateDictionary() {
-        const hrefs = ["#intro", "#blah"];
+        const hrefs = ["#hello-world", "#introducing-jsx", "#rendering-elements", "#components-and-props", "#state-and-lifecycle", "#handling-events", "#condtional-rendering", "#lists-and-keys", "#forms", "#lifting-state-up", "#composition-vs-inheritance", "#thinking-in-react"];
+        const linkText = ["Hello World", "Introducing JSX", "Rendering Elements", "Components and Props", "State and Lifecycle", "Handling Events", "Conditional Rendering", "Lists and Keys", "Forms", "Lifting State Up", "Composition vs Inheritance", "Thinking In React"];
         let dict = []; 
 
         hrefs.forEach(function (href, index) {
             dict.push({
-                key: index,
-                value: href
+                key: linkText[index],
+                value: href,
+                index: index
             });
         });
 
@@ -30,9 +32,11 @@ class NavBar extends Component {
         return (
             <nav id="navbar">
                 <header>
-                    <h2>{this.props.title}</h2>
-                </header>          
-                {this.listItems}
+                    <h4>{this.props.title}</h4>
+                </header>   
+                <ul>
+                    {this.listItems}
+                </ul>                   
             </nav> 
         );
     }

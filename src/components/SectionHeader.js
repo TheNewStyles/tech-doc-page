@@ -6,7 +6,7 @@ class SectionHeader extends Component {
     render() {
       return (
         <header>
-            <h2>
+            <h2 id={this.props.id}>
                 {this.props.title}
             </h2>            
         </header>

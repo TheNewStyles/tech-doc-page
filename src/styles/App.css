@@ -2,3 +2,33 @@
     display: flex;
 }
 
+#main-doc {
+    order: 1;
+    width: 80%;
+}
+
+#hw-header  {
+    border-top: none; 
+    margin-top: 0;
+    padding-top: 0;
+}
+
+h1 {
+    padding-left: 0.4em;
+}
+
+@media screen and (min-width: 0px) and (max-width: 580px) {
+    #main-doc  {
+         width: 100%; 
+    } 
+
+    .code {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;        
+    }
+
+    .code pre {
+        border-radius: 0;
+    }
+}

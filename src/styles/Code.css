@@ -6,6 +6,7 @@ pre {
     overflow: auto;
     tab-size:4;
     border-radius: 0.5em;
+    padding: 1.25em;
 }
 
 pre > code {
@@ -16,4 +17,11 @@ pre > code {
 
 .linenums li {
     list-style-type: decimal;
+}
+
+figcaption {
+    font-size: 18px;
+    font-weight: 300;
+    color: #6d6d6d;
+    padding: 1em;    
 }
