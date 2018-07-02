@@ -7,6 +7,7 @@ pre {
     tab-size:4;
     border-radius: 0.5em;
     padding: 1.25em;
+    max-width: 800px;
 }
 
 pre > code {
@@ -23,5 +24,9 @@ figcaption {
     font-size: 18px;
     font-weight: 300;
     color: #6d6d6d;
-    padding: 1em;    
+    padding: 1em;
+}
+
+.no-caption {
+    display: none;
 }

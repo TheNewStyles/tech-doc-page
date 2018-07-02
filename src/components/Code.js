@@ -6,7 +6,7 @@ class Code extends Component {
     render() {
       return (
             <figure className="code">
-                <figcaption>{this.props.codeCaption}</figcaption>
+                <figcaption className={this.props.captionClass}>{this.props.codeCaption}</figcaption>
                 <pre className="prettyprint linenums:1" >
                     <code contentEditable spellCheck="false" suppressContentEditableWarning="true">
                         {this.props.code}

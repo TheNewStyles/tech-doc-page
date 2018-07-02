@@ -8,13 +8,21 @@
 }
 
 #hw-header  {
-    border-top: none; 
+    border-top: none;
     margin-top: 0;
     padding-top: 0;
 }
 
 #react-doc-title {
     border-top: none;
+}
+
+.nav-container {
+    flex-direction: column;
+    height: 5000px;
+    background-color: #f7f7f7;
+    border-left: 1px solid #ececec;
+    order: 2;
 }
 
 h1 {
@@ -25,13 +33,13 @@ h1 {
 
 @media screen and (min-width: 0px) and (max-width: 580px) {
     #main-doc  {
-         width: 100%; 
-    } 
+         width: 100%;
+    }
 
     .code {
         width: 100%;
         margin-right: 0;
-        margin-left: 0;        
+        margin-left: 0;
     }
 
     .code pre {

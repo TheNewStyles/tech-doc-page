@@ -6,9 +6,9 @@ class SectionHeader extends Component {
     render() {
       return (
         <header>
-            <h2 id={this.props.id}>
+            <h3 id={this.props.id}>
                 {this.props.title}
-            </h2>            
+            </h3>            
         </header>
         );
     }
