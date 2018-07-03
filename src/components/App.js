@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar'
-// import List from './List'
-import SectionHeader from './SectionHeader'
 
-// import logo from '../images/logo.svg';
 import '../styles/App.css';
+import NavBar from './NavBar'
+import List from './List'
+import SectionHeader from './SectionHeader'
+import logo from '../images/gif-updates.gif';
 import Paragraph from './Paragraph';
 import Code from './Code';
 import ExternalLink from './ExternalLink';
@@ -52,8 +52,8 @@ class App extends Component {
             </section>
             <section id="introducing-jsx" className="main-section">
                 <h1>Introducing JSX</h1>
-                <Code codeCaption="Consider this variable declaration:" code={this.code[1]} />  
-                <Paragraph text="This funny tag syntax is neither a string nor HTML." /> 
+                <Code codeCaption="Consider this variable declaration:" code={this.code[1]} />
+                <Paragraph text="This funny tag syntax is neither a string nor HTML." />
                 <Paragraph text="It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript." />
                 <Paragraph text={["JSX produces React “elements”. We will explore rendering them to the DOM in the ", <a href="#rendering-elements">next section.</a>  ," Below, you can find the basics of JSX necessary to get you started."]} />
                 <SectionHeader title="Why JSX?" />
@@ -88,8 +88,68 @@ class App extends Component {
                 <SectionHeader title="JSX Prevents Injection Attacks" />
                 <Paragraph text="It is safe to embed user input in JSX:" />
                 <Code code={this.code[9]} captionClass="no-caption" />
-                <Paragraph text={["By default, React DOM " , , " any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent " , , " attacks."]} />
+                <Paragraph text={["By default, React DOM " , <a href="https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html">escapes</a> , " any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent " , <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">XSS (cross-site-scripting) </a> , " attacks."]} />
+                <SectionHeader title="JSX Represents Objects" />
+                <Paragraph text={["Babel compiles JSX down to " , <code>React.createElement()</code> , " calls."]} />
+                <Paragraph text="These two examples are identical:" />
+                <Code code={this.code[10]} captionClass="no-caption" />
+                <Code code={this.code[11]} captionClass="no-caption" />
+                <Paragraph text={[ <code> React.createElement() </code> , " performs a few checks to help you write bug-free code but essentially it creates an object like this:"]} />
+                <Code code={this.code[12]} captionClass="no-caption" />
+                <Paragraph text="These objects are called “React elements”. You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date." />
+                <Paragraph text="We will explore rendering React elements to the DOM in the next section." />
+                <Tip title="Tip" text={["We recommend using the " , <a href="http://babeljs.io/docs/editors">“Babel” language definition</a> , " for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the " , <a href="https://labs.voronianski.com/oceanic-next-color-scheme/">Oceanic Next</a> , " color scheme which is compatible with it."]} />
             </section>
+            <section id="rendering-elements" className="main-section">
+                <h1>Rendering Elements</h1>
+                <Paragraph text="Elements are the smallest building blocks of React apps." />
+                <Code code={this.code[13]} codeCaption="An element describes what you want to see on the screen:" />
+                <Paragraph text="Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements." />
+                <Tip title="Note:" text={["One might confuse elements with a more widely known concept of “components”. We will introduce components in the " , <a href="#components-and-props" > next section. </a> , " Elements are what components are “made of”, and we encourage you to read this section before jumping ahead."]} />
+                <SectionHeader title="Rendering an Element into the DOM" />
+                <Code code={this.code[14]} codeCaption="Let’s say there is a <div> somewhere in your HTML file:" />
+                <Paragraph text={["We call this a “root” DOM node because everything inside it will be managed by React DOM." , <br></br> , <br></br> , "Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like." , <br></br> , <br></br> , "To render a React element into a root DOM node, pass both to ReactDOM.render():"]} />
+                <Code code={this.code[15]} captionClass="no-caption" />
+                <ExternalLink href="https://reactjs.org/redirect-to-codepen/rendering-elements/render-an-element" linkText="Try it on CodePen" />
+                <Paragraph text="It displays “Hello, world” on the page." />
+                <SectionHeader title="Updating the Rendered Element" />
+                <Paragraph text={["React elements are " , <a href="https://en.wikipedia.org/wiki/Immutable_object" >immutable.</a> , " Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time."]} />
+                <Paragraph text="With our knowledge so far, the only way to update the UI is to create a new element, and pass it to ReactDOM.render()." />
+                <Code code={this.code[16]} codeCaption="Consider this ticking clock example:" />
+                <ExternalLink href="https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element" linkText="Try it on CodePen" />
+                <Paragraph text="It calls ReactDOM.render() every second from a setInterval() callback." />
+                <Tip title="Note:" text={["In practice, most React apps only call ReactDOM.render() once. In the next sections we will learn how such code gets encapsulated into stateful components. " , <br></br> , <br></br> , " We recommend that you don’t skip topics because they build on each other."]} />
+                <SectionHeader title="React Only Updates What’s Necessary" />
+                <Paragraph text="React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state." />
+                <Paragraph text="You can verify by inspecting the last example with the browser tools:" />
+                <Paragraph text="Even though we create an element describing the whole UI tree on every tick, only the text node whose contents has changed gets updated by React DOM." />
+                <div>
+                    <img src={logo} alt="DOM inspector showing granular updates" />
+                </div>
+                <Paragraph text="In our experience, thinking about how the UI should look at any given moment rather than how to change it over time eliminates a whole class of bugs." />
+            </section>
+            <section id="components-and-props" className="main-section">
+                <h1>Components and Props</h1>
+                <Paragraph text={["Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a " , <a href="https://reactjs.org/docs/react-component.html" >detailed component API reference here.</a>]} />
+                <Paragraph text="Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen." />
+                <SectionHeader title="Functional and Class Components" />
+                <Code codeCaption="The simplest way to define a component is to write a JavaScript function:" code={this.code[17]} />
+                <Paragraph text="This function is a valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “functional” because they are literally JavaScript functions." />
+                <Code codeCaption="You can also use an ES6 class to define a component:" code={this.code[18]} />
+                <Paragraph text="The above two components are equivalent from React’s point of view." />
+                <Paragraph text="Classes have some additional features that we will discuss in the next sections. Until then, we will use functional components for their conciseness." />
+                <SectionHeader title="Rendering a Component" />
+                <Code code="const element = <div />;" codeCaption="Previously, we only encountered React elements that represent DOM tags:" />
+                <Code code='const element = <Welcome name="Sara" />;' codeCaption="However, elements can also represent user-defined components:" />;"
+                <Paragraph text="When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object “props”." />
+                <Code code={this.code[19]} codeCaption="For example, this code renders “Hello, Sara” on the page:" />
+                <ExternalLink linkText="Try it on CodePen" href="codepen.io"/>
+                <List title="Let’s recap what happens in this example:" listItems={["We call ReactDOM.render() with the <Welcome name='Sara' /> element.", "React calls the Welcome component with {name: 'Sara'} as the props." , "Our Welcome component returns a <h1>Hello, Sara</h1> element as the result." , "React DOM efficiently updates the DOM to match <h1>Hello, Sara</h1>."]} />
+                <Tip title="Note: Always start component names with a capital letter." text="React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope." />
+                <SectionHeader title="Composing Components" />
+                <Paragraph text="Components can refer to other components in their output. This lets us use the same component abstraction for any level of detail. A button, a form, a dialog, a screen: in React apps, all those are commonly expressed as components." />
+                <Code code={this.code[20]} codeCaption="For example, we can create an App component that renders Welcome many times:" />
+           </section>
         </main>
       </div>
     );
@@ -142,9 +202,77 @@ ReactDOM.render(
       <h2>Good to see you here.</h2>
     </div>
   );`,
+  `const element = (
+    <h1 className="greeting">
+      Hello, world!
+    </h1>
+  );`,
   `const title = response.potentiallyMaliciousInput;
   // This is safe:
-  const element = <h1>{title}</h1>;`
+  const element = <h1>{title}</h1>;`,
+  `const element = React.createElement(
+    'h1',
+    {className: 'greeting'},
+    'Hello, world!'
+  );`,
+  `// Note: this structure is simplified
+  const element = {
+    type: 'h1',
+    props: {
+      className: 'greeting',
+      children: 'Hello, world!'
+    }
+  };`,
+  `const element = <h1>Hello, world</h1>;`,
+  `<div id="root"></div>`,
+  `const element = <h1>Hello, world</h1>;
+  ReactDOM.render(element, document.getElementById('root'));`,
+  `function tick() {
+    const element = (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {new Date().toLocaleTimeString()}.</h2>
+      </div>
+    );
+    ReactDOM.render(element, document.getElementById('root'));
+  }
+
+  setInterval(tick, 1000);`,
+  `function Welcome(props) {
+    return <h1>Hello, {props.name}</h1>;
+  }`,
+  `class Welcome extends React.Component {
+    render() {
+      return <h1>Hello, {this.props.name}</h1>;
+    }
+  }`,
+  `function Welcome(props) {
+    return <h1>Hello, {props.name}</h1>;
+  }
+
+  const element = <Welcome name="Sara" />;
+  ReactDOM.render(
+    element,
+    document.getElementById('root')
+  );`,
+  `function Welcome(props) {
+    return <h1>Hello, {props.name}</h1>;
+  }
+
+  function App() {
+    return (
+      <div>
+        <Welcome name="Sara" />
+        <Welcome name="Cahal" />
+        <Welcome name="Edite" />
+      </div>
+    );
+  }
+
+  ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+  );`
 ];
 
 

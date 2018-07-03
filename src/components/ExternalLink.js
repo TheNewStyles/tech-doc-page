@@ -10,4 +10,4 @@ class ExternalLink extends Component {
     }
 }
 
-export default ExternalLink; 
+export default ExternalLink;

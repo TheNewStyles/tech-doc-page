@@ -25,10 +25,22 @@
     order: 2;
 }
 
+.prettyprint {
+    background: #282c34;
+}
+
+li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
+    background:  #282c34;
+}
+
 h1 {
     padding-left: 0.4em;
     padding-top: 1em;
     border-top: 1px solid #ececec;
+}
+
+img {
+    padding-left: 3em;
 }
 
 @media screen and (min-width: 0px) and (max-width: 580px) {
