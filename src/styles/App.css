@@ -19,7 +19,6 @@
 
 .nav-container {
     flex-direction: column;
-    height: 5000px;
     background-color: #f7f7f7;
     border-left: 1px solid #ececec;
     order: 2;

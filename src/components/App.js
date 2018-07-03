@@ -149,6 +149,28 @@ class App extends Component {
                 <SectionHeader title="Composing Components" />
                 <Paragraph text="Components can refer to other components in their output. This lets us use the same component abstraction for any level of detail. A button, a form, a dialog, a screen: in React apps, all those are commonly expressed as components." />
                 <Code code={this.code[20]} codeCaption="For example, we can create an App component that renders Welcome many times:" />
+                <ExternalLink linkText="Try it on CodePen" href="codepen.io" />
+                <Paragraph text="Typically, new React apps have a single App component at the very top. However, if you integrate React into an existing app, you might start bottom-up with a small component like Button and gradually work your way to the top of the view hierarchy." />
+                <SectionHeader title="Extracting Components" />
+                <Paragraph text="Don’t be afraid to split components into smaller components." />
+                <Code codeCaption="For example, consider this Comment component:" code={this.code[21]} />
+                <Paragraph text="It accepts author (an object), text (a string), and date (a date) as props, and describes a comment on a social media website."/>
+                <Paragraph text="This component can be tricky to change because of all the nesting, and it is also hard to reuse individual parts of it. Let’s extract a few components from it."/>
+                <Code code={this.code[22]} codeCaption="First, we will extract Avatar:" />
+                <Paragraph text="The Avatar doesn’t need to know that it is being rendered inside a Comment. This is why we have given its prop a more generic name: user rather than author." />
+                <Paragraph text="We recommend naming props from the component’s own point of view rather than the context in which it is being used." />
+                <Code code={this.code[23]} codeCaption="We can now simplify Comment a tiny bit:" />
+                <Code code={this.code[24]} codeCaption="Next, we will extract a UserInfo component that renders an Avatar next to the user’s name:" />
+                <Code code={this.code[25]} codeCaption="This lets us simplify Comment even further:" />
+                <Paragraph text="Extracting components might seem like grunt work at first, but having a palette of reusable components pays off in larger apps. A good rule of thumb is that if a part of your UI is used several times (Button, Panel, Avatar), or is complex enough on its own (App, FeedStory, Comment), it is a good candidate to be a reusable component." />
+                <SectionHeader title="Props are Read-Only" />
+                <Paragraph text="Whether you declare a component as a function or a class, it must never modify its own props. " />
+                <Code code={this.code[26]} codeCaption="Consider this sum function:" />
+                <Paragraph text="Such functions are called “pure” because they do not attempt to change their inputs, and always return the same result for the same inputs." />
+                <Code code={this.code[27]} codeCaption="Such functions are called “pure” because they do not attempt to change their inputs, and always return the same result for the same inputs." />
+                <Paragraph text="React is pretty flexible but it has a single strict rule:" />
+                <Paragraph text={[<strong>All React components must act like pure functions with respect to their props.</strong>]} />
+                <Paragraph text="Of course, application UIs are dynamic and change over time. In the next section, we will introduce a new concept of “state”. State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule." />
            </section>
         </main>
       </div>
@@ -272,7 +294,84 @@ ReactDOM.render(
   ReactDOM.render(
     <App />,
     document.getElementById('root')
-  );`
+  );`,
+  `function Comment(props) {
+    return (
+      <div className="Comment">
+        <div className="UserInfo">
+          <img className="Avatar"
+            src={props.author.avatarUrl}
+            alt={props.author.name}
+          />
+          <div className="UserInfo-name">
+            {props.author.name}
+          </div>
+        </div>
+        <div className="Comment-text">
+          {props.text}
+        </div>
+        <div className="Comment-date">
+          {formatDate(props.date)}
+        </div>
+      </div>
+    );
+  }`,
+  `function Avatar(props) {
+    return (
+      <img className="Avatar"
+        src={props.user.avatarUrl}
+        alt={props.user.name}
+      />
+
+    );
+  }`,
+  `function Comment(props) {
+    return (
+      <div className="Comment">
+        <div className="UserInfo">
+          <Avatar user={props.author} />
+          <div className="UserInfo-name">
+            {props.author.name}
+          </div>
+        </div>
+        <div className="Comment-text">
+          {props.text}
+        </div>
+        <div className="Comment-date">
+          {formatDate(props.date)}
+        </div>
+      </div>
+    );
+  }`,
+  `function UserInfo(props) {
+    return (
+      <div className="UserInfo">
+        <Avatar user={props.user} />
+        <div className="UserInfo-name">
+          {props.user.name}
+        </div>
+      </div>
+    );
+  }`,
+  `function Comment(props) {
+    return (
+      <div className="Comment">
+        <UserInfo user={props.author} />
+        <div className="Comment-text">
+          {props.text}
+        </div>
+        <div className="Comment-date">
+          {formatDate(props.date)}
+        </div>
+      </div>
+    );
+  }`, 
+  `function sum(a, b) {
+    return a + b;
+  }`,
+  `function withdraw(account, amount) {
+    account.total -= amount;
+  }`
 ];
 
 
