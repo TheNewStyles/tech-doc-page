@@ -5,7 +5,7 @@ import '../styles/ExternalLink.css';
 class ExternalLink extends Component {
     render() {
       return (
-        <a className="external-link" href={this.props.link}>{this.props.linkText}</a>
+        <a className={["external-link " + this.props.secondClassName]} href={this.props.link}>{this.props.linkText}</a>
         );
     }
 }
