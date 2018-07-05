@@ -368,6 +368,99 @@ class App extends Component {
                     `)}
                     codeCaption="In React, this could instead be:"
                 />
+                <Paragraph text="Here, e is a synthetic event. React defines these synthetic events according to the W3C spec, so you don’t need to worry about cross-browser compatibility. See the SyntheticEvent reference guide to learn more." />
+                <Paragraph text="When using React you should generally not need to call addEventListener to add listeners to a DOM element after it is created. Instead, just provide a listener when the element is initially rendered."  />
+                <Paragraph text="When you define a component using an ES6 class, a common pattern is for an event handler to be a method on the class. For example, this Toggle component renders a button that lets the user toggle between “ON” and “OFF” states:" />
+                <Code
+                    captionClass="no-caption"
+                    code={this.dedent(
+                    `
+                    class Toggle extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = {isToggleOn: true};
+
+                            // This binding is necessary to make 'this' work in the callback
+                            this.handleClick = this.handleClick.bind(this);
+                        }
+
+                        handleClick() {
+                            this.setState(prevState => ({
+                            isToggleOn: !prevState.isToggleOn
+                            }));
+                        }
+
+                        render() {
+                            return (
+                            <button onClick={this.handleClick}>
+                                {this.state.isToggleOn ? 'ON' : 'OFF'}
+                            </button>
+                            );
+                        }
+                    }
+
+                    ReactDOM.render(
+                        <Toggle />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="You have to be careful about the meaning of this in JSX callbacks. In JavaScript, class methods are not bound by default. If you forget to bind this.handleClick and pass it to onClick, this will be undefined when the function is actually called." />
+                <Paragraph text={["This is not React-specific behavior; it is a part of " , <ExternalLink secondClassName="no-margin" linkText="how JavaScript functions work" href="https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/" /> , " Generally, if you refer to a method without () after it, such as onClick={this.handleClick}, you should bind that method."]} />
+                <Paragraph text={["If calling bind annoys you, there are two ways you can get around this. If you are using the experimental " , <ExternalLink secondClassName="no-margin" linkText="public class fields syntax," href="https://babeljs.io/docs/en/babel-plugin-transform-class-properties/" /> , " you can use class fields to correctly bind callbacks:"]} />
+                <Code code={this.dedent(`
+                    class LoggingButton extends React.Component {
+                    // This syntax ensures "this" is bound within handleClick.
+                    // Warning: this is *experimental* syntax.
+                    handleClick = () => {
+                        console.log('this is:', this);
+                    }
+
+                    render() {
+                        return (
+                        <button onClick={this.handleClick}>
+                            Click me
+                        </button>
+                        );
+                    }
+                    })`)}
+                captionClass="no-caption" />
+                <Paragraph text="This syntax is enabled by default in Create React App." />
+                <Code
+                    code={this.dedent(`
+                    class LoggingButton extends React.Component {
+                        handleClick() {
+                            console.log('this is:', this);
+                        }
+
+                        render() {
+                            // This syntax ensures "this" is bound within handleClick
+                            return (
+                            <button onClick={(e) => this.handleClick(e)}>
+                                Click me
+                            </button>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="If you aren’t using class fields syntax, you can use an arrow function in the callback:"
+                />
+                <Paragraph text="The problem with this syntax is that a different callback is created each time the LoggingButton renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem." />
+                <SectionHeader title="Passing Arguments to Event Handlers" />
+                <Code
+                    code={this.dedent(`
+                    <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+                    <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+                    `)}
+                    codeCaption="Inside a loop it is common to want to pass an extra parameter to an event handler. For example, if id is the row ID, either of the following would work:"
+                />
+                <Paragraph text="The above two lines are equivalent, and use arrow functions and Function.prototype.bind respectively.
+
+In both cases, the e argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded." />
+           </section>
+           <section id="conditional-rendering" className="main-section">
+               <h1>Conditional Rendering</h1>
            </section>
         </main>
       </div>

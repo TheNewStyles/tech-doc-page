@@ -27,7 +27,7 @@ class Code extends Component {
                 <figcaption className={this.props.captionClass}>{this.props.codeCaption}</figcaption>
                 <pre className="prettyprint linenums:1" >
                     <code contentEditable spellCheck="false" suppressContentEditableWarning="true">
-                    {this.displayCode(this.props.code)}
+                    {this.displayCode (this.props.code)}
                     </code>
                 </pre>
             </figure>
