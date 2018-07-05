@@ -13,10 +13,12 @@ class List extends Component {
 
     render() {
         return (
-            <ul>
-            <lh><strong>{this.props.title}</strong></lh>
-                {this.list}
-            </ul>
+            <div>
+                <p><strong>{this.props.title}</strong></p>
+                <ul>
+                    {this.list}
+                </ul>
+            </div>
         );
     }
 }

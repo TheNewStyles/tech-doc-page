@@ -12,10 +12,9 @@ import Tip from './Tip';
 
 class App extends Component {
 
-     dedent(callSite, ...args) {
-
+    //dedent from https://gist.github.com/zenparsing/5dffde82d9acef19e43c
+    dedent(callSite, ...args) {
         function format(str) {
-
             let size = -1;
 
             return str.replace(/\n(\s+)/g, (m, m1) => {
@@ -40,7 +39,6 @@ class App extends Component {
 
         return format(output);
     }
-
 
   render() {
 
@@ -171,7 +169,7 @@ class App extends Component {
                 <Paragraph text="Classes have some additional features that we will discuss in the next sections. Until then, we will use functional components for their conciseness." />
                 <SectionHeader title="Rendering a Component" />
                 <Code code="const element = <div />;" codeCaption="Previously, we only encountered React elements that represent DOM tags:" />
-                <Code code='const element = <Welcome name="Sara" />;' codeCaption="However, elements can also represent user-defined components:" />;"
+                <Code code='const element = <Welcome name="Sara" />;' codeCaption="However, elements can also represent user-defined components:" />
                 <Paragraph text="When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object “props”." />
                 <Code code={this.code[19]} codeCaption="For example, this code renders “Hello, Sara” on the page:" />
                 <ExternalLink linkText="Try it on CodePen" href="codepen.io"/>
@@ -243,7 +241,7 @@ class App extends Component {
                 <Code code={this.code[39]} codeCaption="We will tear down the timer in the componentWillUnmount() lifecycle hook:" />
                 <Paragraph text="Finally, we will implement a method called tick() that the Clock component will run every second." />
                 <Code code={this.code[40]} codeCaption="It will use this.setState() to schedule updates to the component local state:" />
-                <ExternalLink secondClassName="no-margin" linkText="Try it on Codepen" href="https://codepen.io/gaearon/pen/amqdNA?editors=0010" />
+                <ExternalLink linkText="Try it on Codepen" href="https://codepen.io/gaearon/pen/amqdNA?editors=0010" />
                 <Paragraph text="Now the clock ticks every second." />
                 <List title="Let’s quickly recap what’s going on and the order in which the methods are called:" listItems={["1. When <Clock /> is passed to ReactDOM.render(), React calls the constructor of the Clock component. Since Clock needs to display the current time, it initializes this.state with an object including the current time. We will later update this state.","2. React then calls the Clock component’s render() method. This is how React learns what should be displayed on the screen. React then updates the DOM to match the Clock’s render output." , "3. When the Clock output is inserted in the DOM, React calls the componentDidMount() lifecycle hook. Inside it, the Clock component asks the browser to set up a timer to call the component’s tick() method once a second." , "4. Every second the browser calls the tick() method. Inside it, the Clock component schedules a UI update by calling setState() with an object containing the current time. Thanks to the setState() call, React knows the state has changed, and calls the render() method again to learn what should be on the screen. This time, this.state.date in the render() method will be different, and so the render output will include the updated time. React updates the DOM accordingly.", "5 If the Clock component is ever removed from the DOM, React calls the componentWillUnmount() lifecycle hook so the timer is stopped."]} />
                 <SectionHeader title="Using State Correctly" />
@@ -280,6 +278,96 @@ class App extends Component {
                     `).trim()} />
                 <Paragraph text="The merging is shallow, so this.setState({comments}) leaves this.state.posts intact, but completely replaces this.state.comments." />
                 <SectionHeader title="The Data Flows Down" />
+                <Paragraph text="Neither parent nor child components can know if a certain component is stateful or stateless, and they shouldn’t care whether it is defined as a function or a class." />
+                <Paragraph text="This is why state is often called local or encapsulated. It is not accessible to any component other than the one that owns and sets it." />
+                <Code
+                    code={this.dedent(`<h2>It is {this.state.date.toLocaleTimeString()}.</h2>`)}
+                    codeCaption="A component may choose to pass its state down as props to its child components:"
+                />
+                <Code
+                    code={this.dedent(`<FormattedDate date={this.state.date} />`)}
+                    codeCaption="This also works for user-defined components:"
+                />
+                <Paragraph text="The FormattedDate component would receive the date in its props and wouldn’t know "/>
+                <Code
+                    code={this.dedent(`
+                    function FormattedDate(props) {
+                        return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+                    }
+                    `)}
+                    codeCaption="whether it came from the Clock’s state, from the Clock’s props, or was typed by hand:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/zKRqNB?editors=0010" />
+                <Paragraph text="This is commonly called a “top-down” or “unidirectional” data flow. Any state is always owned by some specific component, and any data or UI derived from that state can only affect components “below” them in the tree." />
+                <Paragraph text="If you imagine a component tree as a waterfall of props, each component’s state is like an additional water source that joins it at an arbitrary point but also flows down." />
+                <Code
+                    code={this.dedent(`
+                    function App() {
+                        return (
+                                <div>
+                                    <Clock />
+                                    <Clock />
+                                    <Clock />
+                                </div>
+                            );
+                        }
+
+                        ReactDOM.render(
+                            <App />,
+                            document.getElementById('root')
+                        );`)}
+                    codeCaption="To show that all components are truly isolated, we can create an App component that renders three <Clock>s:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="Each Clock sets up its own timer and updates independently." />
+                <Paragraph text="In React apps, whether a component is stateful or stateless is considered an implementation detail of the component that may change over time. You can use stateless components inside stateful components, and vice versa." />
+           </section>
+           <section id="handling-events" className="main-section">
+               <h1>Handling Events</h1>
+               <List title="Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic differences:"
+                     listItems={["React events are named using camelCase, rather than lowercase.", "With JSX you pass a function as the event handler, rather than a string."]}
+               />
+               <Code
+                    code={this.dedent(`
+                    <button onclick="activateLasers()">
+                        Activate Lasers
+                    </button>
+                    `)}
+                    codeCaption="For example, the HTML:"
+                />
+                <Code
+                    code={this.dedent(`
+                    <button onClick={activateLasers}>
+                        Activate Lasers
+                    </button>
+                    `)}
+                    codeCaption="is slightly different in React:"
+                />
+                <Code
+                    code={this.dedent(`
+                    <a href="#" onclick="console.log('The link was clicked.'); return false">
+                        Click me
+                    </a>
+                    `)}
+                    codeCaption="Another difference is that you cannot return false to prevent default behavior in React. You must call preventDefault explicitly. For example, with plain HTML, to prevent the default link behavior of opening a new page, you can write:"
+                />
+                <Code
+                    code={this.dedent(`
+                    function ActionLink() {
+                        function handleClick(e) {
+                            e.preventDefault();
+                            console.log('The link was clicked.');
+                        }
+
+                        return (
+                            <a href="#" onClick={handleClick}>
+                            Click me
+                            </a>
+                        );
+                    }
+                    `)}
+                    codeCaption="In React, this could instead be:"
+                />
            </section>
         </main>
       </div>

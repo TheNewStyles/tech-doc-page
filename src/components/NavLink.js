@@ -7,9 +7,9 @@ class NavLink extends Component {
       return (
           <li>
             <a className="nav-link" href={this.props.href}>{this.props.number}. {this.props.text}</a>
-          </li>          
+          </li>
         );
     }
 }
 
-export default NavLink; 
+export default NavLink;

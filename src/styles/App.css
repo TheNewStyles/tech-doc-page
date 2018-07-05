@@ -4,7 +4,7 @@
 
 #main-doc {
     order: 1;
-    width: 80%;
+    width: 70%;
     padding-left: 3em;
 }
 
@@ -46,6 +46,7 @@ img {
 @media screen and (min-width: 0px) and (max-width: 580px) {
     #main-doc  {
          width: 100%;
+         padding-left: 0em;
     }
 
     .code {
