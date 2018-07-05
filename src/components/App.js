@@ -11,6 +11,37 @@ import ExternalLink from './ExternalLink';
 import Tip from './Tip';
 
 class App extends Component {
+
+     dedent(callSite, ...args) {
+
+        function format(str) {
+
+            let size = -1;
+
+            return str.replace(/\n(\s+)/g, (m, m1) => {
+
+                if (size < 0)
+                    size = m1.replace(/\t/g, "    ").length;
+
+                return "\n" + m1.slice(Math.min(m1.length, size));
+            });
+        }
+
+        if (typeof callSite === "string")
+            return format(callSite);
+
+        if (typeof callSite === "function")
+            return (...args) => format(callSite(...args));
+
+        let output = callSite
+            .slice(0, args.length + 1)
+            .map((text, i) => (i === 0 ? "" : args[i - 1]) + text)
+            .join("");
+
+        return format(output);
+    }
+
+
   render() {
 
     return (
@@ -215,12 +246,45 @@ class App extends Component {
                 <ExternalLink secondClassName="no-margin" linkText="Try it on Codepen" href="https://codepen.io/gaearon/pen/amqdNA?editors=0010" />
                 <Paragraph text="Now the clock ticks every second." />
                 <List title="Let’s quickly recap what’s going on and the order in which the methods are called:" listItems={["1. When <Clock /> is passed to ReactDOM.render(), React calls the constructor of the Clock component. Since Clock needs to display the current time, it initializes this.state with an object including the current time. We will later update this state.","2. React then calls the Clock component’s render() method. This is how React learns what should be displayed on the screen. React then updates the DOM to match the Clock’s render output." , "3. When the Clock output is inserted in the DOM, React calls the componentDidMount() lifecycle hook. Inside it, the Clock component asks the browser to set up a timer to call the component’s tick() method once a second." , "4. Every second the browser calls the tick() method. Inside it, the Clock component schedules a UI update by calling setState() with an object containing the current time. Thanks to the setState() call, React knows the state has changed, and calls the render() method again to learn what should be on the screen. This time, this.state.date in the render() method will be different, and so the render output will include the updated time. React updates the DOM accordingly.", "5 If the Clock component is ever removed from the DOM, React calls the componentWillUnmount() lifecycle hook so the timer is stopped."]} />
+                <SectionHeader title="Using State Correctly" />
+                <Paragraph text="There are three things you should know about setState()." />
+                <Paragraph text={<strong>Do Not Modify State Directly</strong>} />
+                <Code code={["// Wrong", <br></br> ," this.state.comment = 'Hello';"]} codeCaption="For example, this will not re-render a component:" />
+                <Code code={["// Correct", <br></br> ,"this.setState({comment: 'Hello'});"]} codeCaption="Instead, use setState():" />
+                <Paragraph text="The only place where you can assign this.state is the constructor." />
+                <SectionHeader title="State Updates May Be Asynchronous" />
+                <Paragraph text="React may batch multiple setState() calls into a single update for performance." />
+                <Paragraph text="Because this.props and this.state may be updated asynchronously, you should not rely on their values for calculating the next state." />
+                <Code code={this.code[41]} codeCaption="For example, this code may fail to update the counter:" />
+                <Code code={this.code[42]} codeCaption="To fix it, use a second form of setState() that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument:" />
+                <Code code={this.code[43]} codeCaption="We used an arrow function above, but it also works with regular functions:" />
+                <SectionHeader title="State Updates are Merged" />
+                <Paragraph text="When you call setState(), React merges the object you provide into the current state." />
+                <Code code={this.code[44]} codeCaption="For example, your state may contain several independent variables:" />
+                <Code   codeCaption="Then you can update them independently with separate setState() calls:"
+                        code={this.dedent(
+                            `
+                            componentDidMount() {
+                                fetchPosts().then(response => {
+                                    this.setState({
+                                        posts: response.posts
+                                    });
+                                });
+
+                                fetchComments().then(response => {
+                                    this.setState({
+                                        comments: response.comments
+                                    });
+                                });
+                            }
+                    `).trim()} />
+                <Paragraph text="The merging is shallow, so this.setState({comments}) leaves this.state.posts intact, but completely replaces this.state.comments." />
+                <SectionHeader title="The Data Flows Down" />
            </section>
         </main>
       </div>
     );
   }
-
 
 code = [
 `ReactDOM.render(
@@ -583,7 +647,29 @@ ReactDOM.render(
   ReactDOM.render(
     <Clock />,
     document.getElementById('root')
-  );`
+  );`,
+  `// Wrong
+  this.setState({
+    counter: this.state.counter + this.props.increment,
+  });
+  `,
+  `// Correct
+  this.setState((prevState, props) => ({
+    counter: prevState.counter + props.increment
+  }));`,
+  `// Correct
+  this.setState(function(prevState, props) {
+    return {
+      counter: prevState.counter + props.increment
+    };
+  });`,
+  ` constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      comments: []
+    };
+  }`
 ];
 
 
