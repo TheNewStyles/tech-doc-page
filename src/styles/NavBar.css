@@ -23,7 +23,8 @@
 
 
 #navbar ul li {
-    margin-top: 5px;
+    margin-top: 0.5em;
+    padding-left: 2em;
 }
 
 #navbar h4 {

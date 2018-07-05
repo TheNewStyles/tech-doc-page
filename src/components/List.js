@@ -13,7 +13,7 @@ class List extends Component {
 
     render() {
         return (
-            <div>
+            <div className="list">
                 <p><strong>{this.props.title}</strong></p>
                 <ul>
                     {this.list}

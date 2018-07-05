@@ -13,9 +13,9 @@ class NavBar extends Component {
     }
 
     populateDictionary() {
-        const hrefs = ["#hello-world", "#introducing-jsx", "#rendering-elements", "#components-and-props", "#state-and-lifecycle", "#handling-events", "#condtional-rendering", "#lists-and-keys", "#forms", "#lifting-state-up", "#composition-vs-inheritance", "#thinking-in-react"];
+        const hrefs = ["#hello-world", "#introducing-jsx", "#rendering-elements", "#components-and-props", "#state-and-lifecycle", "#handling-events", "#conditional-rendering", "#lists-and-keys", "#forms", "#lifting-state-up", "#composition-vs-inheritance", "#thinking-in-react"];
         const linkText = ["Hello World", "Introducing JSX", "Rendering Elements", "Components and Props", "State and Lifecycle", "Handling Events", "Conditional Rendering", "Lists and Keys", "Forms", "Lifting State Up", "Composition vs Inheritance", "Thinking In React"];
-        let dict = []; 
+        let dict = [];
 
         hrefs.forEach(function (href, index) {
             dict.push({
@@ -26,20 +26,20 @@ class NavBar extends Component {
         });
 
         return dict;
-    } 
+    }
 
     render() {
         return (
             <nav id="navbar">
                 <header>
                     <h4>{this.props.title}</h4>
-                </header>   
+                </header>
                 <ul>
                     {this.listItems}
-                </ul>                   
-            </nav> 
+                </ul>
+            </nav>
         );
     }
 }
 
-export default NavBar; 
+export default NavBar;

@@ -1,13 +1,18 @@
-ul {
+.list ul {
     padding-left: 1.5em;
-    padding-top: 1em;
+    padding-top: 0;
+    margin-top: 0;
     padding-bottom: 1em;
     list-style-type: none;
 }
 
-ul li {
+.list ul li {
     padding-left: 2em;
     padding-top: 1em;
     padding-right: 2em;
 }
 
+
+.list p {
+    padding-bottom: 0;
+}

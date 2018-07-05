@@ -455,12 +455,142 @@ class App extends Component {
                     `)}
                     codeCaption="Inside a loop it is common to want to pass an extra parameter to an event handler. For example, if id is the row ID, either of the following would work:"
                 />
-                <Paragraph text="The above two lines are equivalent, and use arrow functions and Function.prototype.bind respectively.
-
-In both cases, the e argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded." />
+                <Paragraph text="The above two lines are equivalent, and use arrow functions and Function.prototype.bind respectively. In both cases, the e argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded." />
            </section>
            <section id="conditional-rendering" className="main-section">
-               <h1>Conditional Rendering</h1>
+                <h1>Conditional Rendering</h1>
+                <Paragraph text="In React, you can create distinct components that encapsulate behavior you need. Then, you can render only some of them, depending on the state of your application." />
+                <Paragraph text="Conditional rendering in React works the same way conditions work in JavaScript. Use JavaScript operators like if or the conditional operator to create elements representing the current state, and let React update the UI to match them." />
+                <Code
+                    code={this.dedent(`
+                    function UserGreeting(props) {
+                        return <h1>Welcome back!</h1>;
+                    }
+
+                    function GuestGreeting(props) {
+                        return <h1>Please sign up.</h1>;
+                    }
+                    `)}
+                    codeCaption="Consider these two components:"
+                />
+                <Code
+                    code={this.dedent(`
+                    function Greeting(props) {
+                        const isLoggedIn = props.isLoggedIn;
+                        if (isLoggedIn) {
+                            return <UserGreeting />;
+                        }
+                        return <GuestGreeting />;
+                    }
+
+                    ReactDOM.render(
+                        // Try changing to isLoggedIn={true}:
+                        <Greeting isLoggedIn={false} />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="We’ll create a Greeting component that displays either of these components depending on whether a user is logged in:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="This example renders a different greeting depending on the value of isLoggedIn prop." />
+                <SectionHeader title="Element Variables" />
+                <Paragraph text="You can use variables to store elements. This can help you conditionally render a part of the component while the rest of the output doesn’t change." />
+                <Code
+                    code={this.dedent(`
+                    function LoginButton(props) {
+                        return (
+                            <button onClick={props.onClick}>
+                            Login
+                            </button>
+                        );
+                    }
+
+                    function LogoutButton(props) {
+                        return (
+                            <button onClick={props.onClick}>
+                            Logout
+                            </button>
+                        );
+                    }
+                    `)}
+                    codeCaption="Consider these two new components representing Logout and Login buttons:"
+                />
+                <Paragraph text="In the example below, we will create a stateful component called LoginControl." />
+                <Code
+                    code={this.dedent(`
+                    class LoginControl extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.handleLoginClick = this.handleLoginClick.bind(this);
+                            this.handleLogoutClick = this.handleLogoutClick.bind(this);
+                            this.state = {isLoggedIn: false};
+                        }
+
+                        handleLoginClick() {
+                            this.setState({isLoggedIn: true});
+                        }
+
+                        handleLogoutClick() {
+                            this.setState({isLoggedIn: false});
+                        }
+
+                        render() {
+                            const isLoggedIn = this.state.isLoggedIn;
+                            let button;
+
+                            if (isLoggedIn) {
+                            button = <LogoutButton onClick={this.handleLogoutClick} />;
+                            } else {
+                            button = <LoginButton onClick={this.handleLoginClick} />
+                            }
+
+                            return (
+                            <div>
+                                <Greeting isLoggedIn={isLoggedIn} />
+                                {button}
+                            </div>
+                            );
+                        }
+                    }
+
+                    ReactDOM.render(
+                        <LoginControl />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="It will render either <LoginButton /> or <LogoutButton /> depending on its current state. It will also render a <Greeting /> from the previous example:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="While declaring a variable and using an if statement is a fine way to conditionally render a component, sometimes you might want to use a shorter syntax. There are a few ways to inline conditions in JSX, explained below." />
+                <SectionHeader title="Inline If with Logical && Operator"  />
+                <Code
+                    code={this.dedent(`
+                    function Mailbox(props) {
+                        const unreadMessages = props.unreadMessages;
+                        return (
+                            <div>
+                            <h1>Hello!</h1>
+                            {unreadMessages.length > 0 &&
+                                <h2>
+                                You have {unreadMessages.length} unread messages.
+                                </h2>
+                            }
+                            </div>
+                        );
+                    }
+
+                    const messages = ['React', 'Re: React', 'Re:Re: React'];
+
+                    ReactDOM.render(
+                        <Mailbox unreadMessages={messages} />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="You may embed any expressions in JSX by wrapping them in curly braces. This includes the JavaScript logical && operator. It can be handy for conditionally including an element:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="It works because in JavaScript, true && expression always evaluates to expression, and false && expression always evaluates to false." />
+                <Paragraph text="Therefore, if the condition is true, the element right after && will appear in the output. If it is false, React will ignore and skip it." />
            </section>
         </main>
       </div>
