@@ -591,6 +591,169 @@ class App extends Component {
                 <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
                 <Paragraph text="It works because in JavaScript, true && expression always evaluates to expression, and false && expression always evaluates to false." />
                 <Paragraph text="Therefore, if the condition is true, the element right after && will appear in the output. If it is false, React will ignore and skip it." />
+                <SectionHeader title="Inline If-Else with Conditional Operator" />
+                <Paragraph text="Another method for conditionally rendering elements inline is to use the JavaScript conditional operator condition ? true : false." />
+                <Code
+                    code={this.dedent(`
+                    render() {
+                        const isLoggedIn = this.state.isLoggedIn;
+                        return (
+                            <div>
+                            The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+                            </div>
+                        );
+                    }
+                    `)}
+                    codeCaption="In the example below, we use it to conditionally render a small block of text."
+                />
+                <Code
+                    code={this.dedent(`
+                    render() {
+                        const isLoggedIn = this.state.isLoggedIn;
+                        return (
+                            <div>
+                            {isLoggedIn ? (
+                                <LogoutButton onClick={this.handleLogoutClick} />
+                            ) : (
+                                <LoginButton onClick={this.handleLoginClick} />
+                            )}
+                            </div>
+                        );
+                    }
+                    `)}
+                    codeCaption="It can also be used for larger expressions although it is less obvious what’s going on:"
+                />
+                <Paragraph text="Just like in JavaScript, it is up to you to choose an appropriate style based on what you and your team consider more readable. Also remember that whenever conditions become too complex, it might be a good time to extract a component." />
+                <SectionHeader title="Preventing Component from Rendering" />
+                <Paragraph text="In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output." />
+                <Code
+                    code={this.dedent(`
+                    function WarningBanner(props) {
+                        if (!props.warn) {
+                            return null;
+                        }
+
+                        return (
+                            <div className="warning">
+                            Warning!
+                            </div>
+                        );
+                    }
+
+                   class Page extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = {showWarning: true};
+                            this.handleToggleClick = this.handleToggleClick.bind(this);
+                        }
+
+                        handleToggleClick() {
+                            this.setState(prevState => ({
+                            showWarning: !prevState.showWarning
+                            }));
+                        }
+
+                        render() {
+                            return (
+                                <div>
+                                    <WarningBanner warn={this.state.showWarning} />
+                                    <button onClick={this.handleToggleClick}>
+                                        {this.state.showWarning ? 'Hide' : 'Show'}
+                                    </button>
+                                </div>
+                            );
+                        }
+                    }
+
+                   ReactDOM.render(
+                        <Page />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="In the example below, the <WarningBanner /> is rendered depending on the value of the prop called warn. If the value of the prop is false, then the component does not render:"
+                />
+                <Paragraph text="Returning null from a component’s render method does not affect the firing of the component’s lifecycle methods. For instance componentDidUpdate will still be called." />
+                <section id="lists-and-keys" className="main-section">
+                    <h1>Lists and Keys</h1>
+                    <Paragraph text="First, let’s review how you transform lists in JavaScript." />
+                    <Code
+                        code={this.dedent(
+                        `const numbers = [1, 2, 3, 4, 5];
+                        const doubled = numbers.map((number) => number * 2);
+                        console.log(doubled);
+                        `)}
+                    codeCaption="Given the code below, we use the map() function to take an array of numbers and double their values. We assign the new array returned by map() to the variable doubled and log it:"
+                    />
+                    <Paragraph text="This code logs [2, 4, 6, 8, 10] to the console." />
+                    <Paragraph text="In React, transforming arrays into lists of elements is nearly identical." />
+                    <SectionHeader title="Rendering Multiple Components" />
+                    <Paragraph text="You can build collections of elements and include them in JSX using curly braces {}." />
+                    <Code
+                        code={this.dedent(`
+                        const numbers = [1, 2, 3, 4, 5];
+                        const listItems = numbers.map((number) =>
+                            <li>{number}</li>
+                        );
+                        `)}
+                        codeCaption="Below, we loop through the numbers array using the JavaScript map() function. We return an <li> element for each item. Finally, we assign the resulting array of elements to listItems:"
+                    />
+                    <Code
+                        code={this.dedent(`
+                        ReactDOM.render(
+                            <ul>{listItems}</ul>,
+                            document.getElementById('root')
+                        );
+                        `)}
+                        codeCaption="We include the entire listItems array inside a <ul> element, and render it to the DOM:"
+                    />
+                    <Paragraph text="This code displays a bullet list of numbers between 1 and 5." />
+                    <SectionHeader title="Basic List Component" />
+                    <Paragraph text="Usually you would render lists inside a component." />
+                    <Code
+                        code={this.dedent(`
+                        function NumberList(props) {
+                            const numbers = props.numbers;
+                            const listItems = numbers.map((number) =>
+                                <li>{number}</li>
+                            );
+                            return (
+                                <ul>{listItems}</ul>
+                            );
+                        }
+
+                       const numbers = [1, 2, 3, 4, 5];
+                        ReactDOM.render(
+                            <NumberList numbers={numbers} />,
+                            document.getElementById('root')
+                        );
+                        `)}
+                        codeCaption="We can refactor the previous example into a component that accepts an array of numbers and outputs an unordered list of elements."
+                    />
+                    <Paragraph text="When you run this code, you’ll be given a warning that a key should be provided for list items. A “key” is a special string attribute you need to include when creating lists of elements. We’ll discuss why it’s important in the next section." />
+                    <Code
+                        code={this.dedent(`
+                        function NumberList(props) {
+                            const numbers = props.numbers;
+                            const listItems = numbers.map((number) =>
+                                <li key={number.toString()}>
+                                {number}
+                                </li>
+                            );
+                            return (
+                                <ul>{listItems}</ul>
+                            );
+                        }
+
+                       const numbers = [1, 2, 3, 4, 5];
+                        ReactDOM.render(
+                            <NumberList numbers={numbers} />,
+                            document.getElementById('root')
+                        );
+                        `)}
+                        codeCaption="Let’s assign a key to our list items inside numbers.map() and fix the missing key issue."
+                    />
+                    <SectionHeader title="Keys" />
+                </section>
            </section>
         </main>
       </div>
