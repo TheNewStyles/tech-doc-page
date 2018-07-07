@@ -60,7 +60,7 @@ class App extends Component {
                 <SectionHeader id="hw-header" title="Hello World" />
                 <Code codeCaption="The smallest React example looks like this:" code={this.code[0]} />
                 <Paragraph text="It displays a heading saying “Hello, world!” on the page." />
-                <ExternalLink link="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
+                <ExternalLink href="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
                 <Paragraph text="Click the link above to open an online editor. Feel free to make some changes, and see how they affect the output. Most pages in this guide will have editable examples like this one." />
                 <article id="how-to-read">
                     <SectionHeader title="How to Read This Guide" />
@@ -96,7 +96,7 @@ class App extends Component {
                 <Paragraph text={["You can put any valid " , <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions">JavaScript expression</a> , " inside the curly braces in JSX. For example, " , <code>2 + 2, user.firstName</code> , " , or " , <code>formatName(user)</code> , " are all valid JavaScript expressions."]} />
                 <Paragraph text={["In the example below, we embed the result of calling a JavaScript function, " , <code>formatName(user)</code> , " into an " , <code>h1</code> , " element"]} />
                 <Code code={this.code[3]} captionClass="no-caption" />
-                <ExternalLink link="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
+                <ExternalLink href="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
                 <Paragraph text={["We split JSX over multiple lines for readability. While it isn’t required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of " , <a href="https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi">automatic semicolon insertion</a> ]} />
                 <SectionHeader title="JSX is an Expression Too" />
                 <Paragraph text="After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects." />
@@ -753,6 +753,39 @@ class App extends Component {
                         codeCaption="Let’s assign a key to our list items inside numbers.map() and fix the missing key issue."
                     />
                     <SectionHeader title="Keys" />
+                    <Code
+                        code={this.dedent(`
+                        const numbers = [1, 2, 3, 4, 5];
+                        const listItems = numbers.map((number) =>
+                        <li key={number.toString()}>
+                            {number}
+                        </li>
+                        );
+                        `)}
+                        codeCaption="Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:"
+                    />
+                    <Code
+                        code={this.dedent(`
+                        const todoItems = todos.map((todo) =>
+                            <li key={todo.id}>
+                                {todo.text}
+                            </li>
+                        );
+                        `)}
+                        codeCaption="The best way to pick a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data as keys:"
+                    />
+                    <Code
+                    code={this.dedent(`
+                    const todoItems = todos.map((todo, index) =>
+                        // Only do this if items have no stable IDs
+                        <li key={index}>
+                            {todo.text}
+                        </li>
+                    );
+                        `)}
+                        codeCaption="When you don’t have stable IDs for rendered items, you may use the item index as a key as a last resort:"
+                    />
+                    <Paragraph text={["We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state. Check out Robin Pokorny’s article for an " , <ExternalLink secondClassName="no-margin" linkText=" in-depth explanation on the negative impacts of using an index as a key." href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318" /> , "If you choose not to assign an explicit key to list items then React will default to using indexes as keys."]} />
                 </section>
            </section>
         </main>
