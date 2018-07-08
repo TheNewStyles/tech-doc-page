@@ -13,11 +13,10 @@ class Tip extends Component {
                     tipText.push(<span key={i} >{textArr[i]}</span>);
                 }
             }
-
-            return <p>{tipText}</p>
+            return <span>{tipText}</span>
         }
         else {
-            return <p>{textArr}</p>
+            return <span>{textArr}</span>
         }
     }
 

@@ -1,6 +1,7 @@
 p {
     padding: 1em 2em 1em 2em;
     max-width: 900px;
+    line-height: 1.5em;
 }
 
 p a {
