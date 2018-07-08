@@ -25,6 +25,7 @@ figcaption {
     font-weight: 300;
     color: #6d6d6d;
     padding: 1em;
+    max-width: 800px;
 }
 
 .no-caption {

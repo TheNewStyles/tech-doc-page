@@ -786,6 +786,228 @@ class App extends Component {
                         codeCaption="When you don’t have stable IDs for rendered items, you may use the item index as a key as a last resort:"
                     />
                     <Paragraph text={["We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state. Check out Robin Pokorny’s article for an " , <ExternalLink secondClassName="no-margin" linkText=" in-depth explanation on the negative impacts of using an index as a key." href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318" /> , "If you choose not to assign an explicit key to list items then React will default to using indexes as keys."]} />
+                    <Paragraph text={["Here is an " , <ExternalLink href="https://reactjs.org/docs/reconciliation.html#recursing-on-children" linkText="in-depth explanation about why keys are necessary" secondClassName="no-margin" /> , " if you’re interested in learning more."]} />
+                    <SectionHeader title="Extracting Components with Keys" />
+                    <Paragraph text="Keys only make sense in the context of the surrounding array." />
+                    <Paragraph text="For example, if you extract a ListItem component, you should keep the key on the <ListItem /> elements in the array rather than on the <li> element in the ListItem itself." />
+                    <Code
+                        code={this.dedent(`
+                        function ListItem(props) {
+                            const value = props.value;
+                            return (
+                                // Wrong! There is no need to specify the key here:
+                                <li key={value.toString()}>
+                                    {value}
+                                </li>
+                            );
+                        }
+
+                       function NumberList(props) {
+                            const numbers = props.numbers;
+                            const listItems = numbers.map((number) =>
+                                // Wrong! The key should have been specified here:
+                                <ListItem value={number} />
+                            );
+                            return (
+                                <ul>
+                                {listItems}
+                                </ul>
+                            );
+                        }
+
+                       const numbers = [1, 2, 3, 4, 5];
+                        ReactDOM.render(
+                            <NumberList numbers={numbers} />,
+                            document.getElementById('root')
+                        );
+                        `)}
+                        codeCaption="Example: Incorrect Key Usage"
+                    />
+                    <Code
+                        code={this.dedent(`
+                        function ListItem(props) {
+                            // Correct! There is no need to specify the key here:
+                            return <li>{props.value}</li>;
+                        }
+
+                       function NumberList(props) {
+                            const numbers = props.numbers;
+                            const listItems = numbers.map((number) =>
+                                // Correct! Key should be specified inside the array.
+                                <ListItem key={number.toString()}
+                                        value={number} />
+                            );
+                            return (
+                                <ul>
+                                    {listItems}
+                                </ul>
+                            );
+                        }
+
+                       const numbers = [1, 2, 3, 4, 5];
+                        ReactDOM.render(
+                        <NumberList numbers={numbers} />,
+                            document.getElementById('root')
+                        );
+                        `)}
+                        codeCaption="Example: Correct Key Usage!"
+                    />
+                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                    <Paragraph text="A good rule of thumb is that elements inside the map() call need keys." />
+                    <SectionHeader title="Keys Must Only Be Unique Among Siblings" />
+                    <Code
+                        code={this.dedent(`
+                        function Blog(props) {
+                            const sidebar = (
+                                <ul>
+                                {props.posts.map((post) =>
+                                    <li key={post.id}>
+                                    {post.title}
+                                    </li>
+                                )}
+                                </ul>
+                            );
+                            const content = props.posts.map((post) =>
+                                <div key={post.id}>
+                                <h3>{post.title}</h3>
+                                <p>{post.content}</p>
+                                </div>
+                            );
+                            return (
+                                <div>
+                                {sidebar}
+                                <hr />
+                                {content}
+                                </div>
+                            );
+                        }
+
+                        const posts = [
+                        {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+                        {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+                        ];
+                        ReactDOM.render(
+                            <Blog posts={posts} />,
+                            document.getElementById('root')
+                        );
+                        `)}
+                        codeCaption="Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique. We can use the same keys when we produce two different arrays:"
+                    />
+                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                    <Code
+                        code={this.dedent(`
+                        const content = posts.map((post) =>
+                        <Post
+                            key={post.id}
+                            id={post.id}
+                            title={post.title} />
+                        );
+                        `)}
+                        codeCaption="Keys serve as a hint to React but they don’t get passed to your components. If you need the same value in your component, pass it explicitly as a prop with a different name:"
+                    />
+                    <Paragraph text="With the example above, the Post component can read props.id, but not props.key." />
+                    <SectionHeader title="Embedding map() in JSX" />
+                    <Code
+                        code={this.dedent(`
+                        function NumberList(props) {
+                            const numbers = props.numbers;
+                            const listItems = numbers.map((number) =>
+                                <ListItem key={number.toString()}
+                                        value={number} />
+
+                            );
+                            return (
+                                <ul>
+                                {listItems}
+                                </ul>
+                            );
+                        }
+                        `)}
+                        codeCaption="In the examples above we declared a separate listItems variable and included it in JSX:"
+                    />
+                    <Code
+                        code={this.dedent(`
+                        function NumberList(props) {
+                            const numbers = props.numbers;
+                            return (
+                                <ul>
+                                {numbers.map((number) =>
+                                    <ListItem key={number.toString()}
+                                            value={number} />
+
+                                )}
+                                </ul>
+                            );
+                        }
+                        `)}
+                        codeCaption="JSX allows embedding any expression in curly braces so we could inline the map() result:"
+                    />
+                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                    <Paragraph text="Sometimes this results in clearer code, but this style can also be abused. Like in JavaScript, it is up to you to decide whether it is worth extracting a variable for readability. Keep in mind that if the map() body is too nested, it might be a good time to extract a component." />
+                </section>
+                <section id="forms" className="main-section">
+                    <h1>Forms</h1>
+                    <Code
+                        code={this.dedent(`
+                        <form>
+                            <label>
+                                Name:
+                                <input type="text" name="name" />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+                        `)}
+                        codeCaption="HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:"
+                    />
+                    <Paragraph text="This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called “controlled components”." />
+                    <SectionHeader title="Controlled Components" />
+                    <Paragraph text="In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState()."/>
+                    <Paragraph text="We can combine the two by making the React state be the “single source of truth”. Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a “controlled component”." />
+                    <Code
+                        code={this.dedent(`
+                        class NameForm extends React.Component {
+                            constructor(props) {
+                                super(props);
+                                this.state = {value: ''};
+
+                                this.handleChange = this.handleChange.bind(this);
+                                this.handleSubmit = this.handleSubmit.bind(this);
+                            }
+
+                            handleChange(event) {
+                                this.setState({value: event.target.value});
+                            }
+
+                            handleSubmit(event) {
+                                alert('A name was submitted: ' + this.state.value);
+                                event.preventDefault();
+                            }
+
+                            render() {
+                                return (
+                                <form onSubmit={this.handleSubmit}>
+                                    <label>
+                                    Name:
+                                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                    </label>
+                                    <input type="submit" value="Submit" />
+                                </form>
+                                );
+                            }
+                        }
+                        `)}
+                        codeCaption="For example, if we want to make the previous example log the name when it is submitted, we can write the form as a controlled component:"
+                    />
+                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                    <Paragraph text="Since the value attribute is set on our form element, the displayed value will always be this.state.value, making the React state the source of truth. Since handleChange runs on every keystroke to update the React state, the displayed value will update as the user types." />
+                    <Code
+                        code={this.dedent(`
+                        handleChange(event) {
+                            this.setState({value: event.target.value.toUpperCase()});
+                        }
+                        `)}
+                        codeCaption="With a controlled component, every state mutation will have an associated handler function. This makes it straightforward to modify or validate user input. For example, if we wanted to enforce that names are written with all uppercase letters, we could write handleChange as:"
+                    />
                 </section>
            </section>
         </main>
