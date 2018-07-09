@@ -1283,6 +1283,73 @@ class App extends Component {
                         `)}
                         codeCaption="We can start by extracting a TemperatureInput component from Calculator. We will add a new scale prop to it that can either be &quot;c&quot; or &quot;f&quot;:"
                     />
+                    <Code
+                        code={this.dedent(`
+                        class Calculator extends React.Component {
+                            render() {
+                                return (
+                                <div>
+                                    <TemperatureInput scale="c" />
+                                    <TemperatureInput scale="f" />
+                                </div>
+                                );
+                            }
+                        }
+                        `)}
+                        codeCaption="We can now change the Calculator to render two separate temperature inputs:"
+                    />
+                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/jGBryx?editors=0010" />
+                    <Paragraph text="We have two inputs now, but when you enter the temperature in one of them, the other doesn’t update. This contradicts our requirement: we want to keep them in sync." />
+                    <Paragraph text="We also can’t display the BoilingVerdict from Calculator. The Calculator doesn’t know the current temperature because it is hidden inside the TemperatureInput." />
+                    <SectionHeader title="Writing Conversion Functions" />
+                    <Code
+                        code={this.dedent(`
+                        function toCelsius(fahrenheit) {
+                            return (fahrenheit - 32) * 5 / 9;
+                        }
+
+                        function toFahrenheit(celsius) {
+                            return (celsius * 9 / 5) + 32;
+                        }
+                        `)}
+                        codeCaption="First, we will write two functions to convert from Celsius to Fahrenheit and back:"
+                    />
+                    <Paragraph text="These two functions convert numbers. We will write another function that takes a string temperature and a converter function as arguments and returns a string. We will use it to calculate the value of one input based on the other input." />
+                    <Code
+                        code={this.dedent(`
+                        function tryConvert(temperature, convert) {
+                            const input = parseFloat(temperature);
+                            if (Number.isNaN(input)) {
+                                return '';
+                            }
+                            const output = convert(input);
+                            const rounded = Math.round(output * 1000) / 1000;
+                            return rounded.toString();
+                        }
+                        `)}
+                        codeCaption="It returns an empty string on an invalid temperature, and it keeps the output rounded to the third decimal place:"
+                    />
+                    <Paragraph text="For example, tryConvert('abc', toCelsius) returns an empty string, and tryConvert('10.22', toFahrenheit) returns '50.396'." />
+                    <SectionHeader title="Lifting State Up" />
+                    <Code
+                        code={this.dedent(`
+                        class TemperatureInput extends React.Component {
+                            constructor(props) {
+                                super(props);
+                                this.handleChange = this.handleChange.bind(this);
+                                this.state = {temperature: ''};
+                            }
+
+                            handleChange(e) {
+                                this.setState({temperature: e.target.value});
+                            }
+
+                            render() {
+                                const temperature = this.state.temperature;
+                                // ...
+                        `)}
+                        codeCaption="Currently, both TemperatureInput components independently keep their values in the local state:"
+                    />
                 </section>
            </section>
         </main>
