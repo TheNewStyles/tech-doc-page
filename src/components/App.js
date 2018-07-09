@@ -1248,7 +1248,41 @@ class App extends Component {
                         codeCaption="Additionally, it renders the BoilingVerdict for the current input value."
                     />
                     <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/ZXeOBm?editors=0010" />
-                    <SectionHeader text="Adding a Second Input" />
+                    <SectionHeader title="Adding a Second Input" />
+                    <Paragraph text="Our new requirement is that, in addition to a Celsius input, we provide a Fahrenheit input, and they are kept in sync." />
+                    <Code
+                        code={this.dedent(`
+                        const scaleNames = {
+                            c: 'Celsius',
+                            f: 'Fahrenheit'
+                        };
+
+                        class TemperatureInput extends React.Component {
+                            constructor(props) {
+                                super(props);
+                                this.handleChange = this.handleChange.bind(this);
+                                this.state = {temperature: ''};
+                            }
+
+                            handleChange(e) {
+                                this.setState({temperature: e.target.value});
+                            }
+
+                            render() {
+                                const temperature = this.state.temperature;
+                                const scale = this.props.scale;
+                                return (
+                                <fieldset>
+                                    <legend>Enter temperature in {scaleNames[scale]}:</legend>
+                                    <input value={temperature}
+                                        onChange={this.handleChange} />
+                                </fieldset>
+                                );
+                            }
+                        }
+                        `)}
+                        codeCaption="We can start by extracting a TemperatureInput component from Calculator. We will add a new scale prop to it that can either be &quot;c&quot; or &quot;f&quot;:"
+                    />
                 </section>
            </section>
         </main>
