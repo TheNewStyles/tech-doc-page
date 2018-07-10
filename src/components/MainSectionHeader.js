@@ -5,7 +5,7 @@ class MainSectionHeader extends Component {
     render() {
       return (
         <header>
-            <h1 id={this.props.id}>
+            <h1>
                 {this.props.title}
             </h1>
         </header>

@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 
+import dom from '../images/gif-updates.gif';
+import mock from '../images/mock.png';
+import subcomponents from '../images/sub-components.png';
+
 import '../styles/App.css';
+
 import NavBar from './NavBar'
 import List from './List'
 import SubSectionHeader from './SubSectionHeader'
-import logo from '../images/gif-updates.gif';
 import Paragraph from './Paragraph';
 import Code from './Code';
 import ExternalLink from './ExternalLink';
 import Tip from './Tip';
 import MainSection from './MainSection';
+import MainSectionHeader from './MainSectionHeader';
 
 class App extends Component {
 
@@ -58,7 +63,7 @@ class App extends Component {
                     <h1 id="react-doc-title">React Documentation</h1>
                     <Paragraph text="This documentation was created from https://reactjs.org/docs" />
                 </header>
-                <SubSectionHeader id="hw-header" title="Hello World" />
+                <MainSectionHeader title="Hello World" />
                 <Code codeCaption="The smallest React example looks like this:" code={this.code[0]} />
                 <Paragraph text="It displays a heading saying “Hello, world!” on the page." />
                 <ExternalLink href="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
@@ -81,7 +86,7 @@ class App extends Component {
                 </article>
             </MainSection>
             <MainSection id="introducing-jsx" className="main-section">
-                <h1>Introducing JSX</h1>
+                <MainSectionHeader title="Introducing JSX"/>
                 <Code codeCaption="Consider this variable declaration:" code={this.code[1]} />
                 <Paragraph text="This funny tag syntax is neither a string nor HTML." />
                 <Paragraph text="It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript." />
@@ -131,7 +136,7 @@ class App extends Component {
                 <Tip title="Tip" text={["We recommend using the " , <a href="http://babeljs.io/docs/editors">“Babel” language definition</a> , " for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the " , <a href="https://labs.voronianski.com/oceanic-next-color-scheme/">Oceanic Next</a> , " color scheme which is compatible with it."]} />
             </MainSection>
             <MainSection id="rendering-elements" className="main-section">
-                <h1>Rendering Elements</h1>
+                <MainSectionHeader title="Rendering Elements" />
                 <Paragraph text="Elements are the smallest building blocks of React apps." />
                 <Code code={this.code[13]} codeCaption="An element describes what you want to see on the screen:" />
                 <Paragraph text="Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements." />
@@ -152,14 +157,14 @@ class App extends Component {
                 <SubSectionHeader title="React Only Updates What’s Necessary" />
                 <Paragraph text="React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state." />
                 <Paragraph text="You can verify by inspecting the last example with the browser tools:" />
-                <Paragraph text="Even though we create an element describing the whole UI tree on every tick, only the text node whose contents has changed gets updated by React DOM." />
-                <div>
-                    <img src={logo} alt="DOM inspector showing granular updates" />
-                </div>
+                <figure>
+                    <figcaption>Even though we create an element describing the whole UI tree on every tick, only the text node whose contents has changed gets updated by React DOM.</figcaption>
+                    <img src={dom} alt="DOM inspector showing granular updates" />
+                </figure>
                 <Paragraph text="In our experience, thinking about how the UI should look at any given moment rather than how to change it over time eliminates a whole class of bugs." />
             </MainSection>
             <MainSection id="components-and-props" className="main-section">
-                <h1>Components and Props</h1>
+                <MainSectionHeader title="Components and Props"/>
                 <Paragraph text={["Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a " , <a href="https://reactjs.org/docs/react-component.html" >detailed component API reference here.</a>]} />
                 <Paragraph text="Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen." />
                 <SubSectionHeader title="Functional and Class Components" />
@@ -203,7 +208,7 @@ class App extends Component {
                 <Paragraph text="Of course, application UIs are dynamic and change over time. In the next section, we will introduce a new concept of “state”. State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule." />
            </MainSection>
            <MainSection id="state-and-lifecycle" className="main-section">
-                <h1>State and Lifecycle</h1>
+                <MainSectionHeader title="State and Lifecycle" />
                 <Paragraph text={["This page introduces the concept of state and lifecycle in a React component. You can find a " , <ExternalLink secondClassName="no-margin" linkText="detailed component API reference here." href="https://reactjs.org/docs/react-component.html" /> ]} />
                 <Paragraph text="Consider the ticking clock example from one of the previous sections. In Rendering Elements, we have only learned one way to update the UI. We call ReactDOM.render() to change the rendered output:" />
                 <Code code={this.code[28]} />
@@ -324,7 +329,7 @@ class App extends Component {
                 <Paragraph text="In React apps, whether a component is stateful or stateless is considered an implementation detail of the component that may change over time. You can use stateless components inside stateful components, and vice versa." />
            </MainSection>
            <MainSection id="handling-events" className="main-section">
-               <h1>Handling Events</h1>
+               <MainSectionHeader title="Handling Events"/>
                <List title="Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic differences:"
                      listItems={["React events are named using camelCase, rather than lowercase.", "With JSX you pass a function as the event handler, rather than a string."]}
                />
@@ -459,7 +464,7 @@ class App extends Component {
                 <Paragraph text="The above two lines are equivalent, and use arrow functions and Function.prototype.bind respectively. In both cases, the e argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded." />
            </MainSection>
            <MainSection id="conditional-rendering" className="main-section">
-                <h1>Conditional Rendering</h1>
+                <MainSectionHeader title="Conditional Rendering"/>
                 <Paragraph text="In React, you can create distinct components that encapsulate behavior you need. Then, you can render only some of them, depending on the state of your application." />
                 <Paragraph text="Conditional rendering in React works the same way conditions work in JavaScript. Use JavaScript operators like if or the conditional operator to create elements representing the current state, and let React update the UI to match them." />
                 <Code
@@ -676,7 +681,7 @@ class App extends Component {
                 <Paragraph text="Returning null from a component’s render method does not affect the firing of the component’s lifecycle methods. For instance componentDidUpdate will still be called." />
             </MainSection>
             <MainSection id="lists-and-keys" className="main-section">
-                <h1>Lists and Keys</h1>
+                <MainSectionHeader title="Lists and Keys"/>
                 <Paragraph text="First, let’s review how you transform lists in JavaScript." />
                 <Code
                     code={this.dedent(
@@ -948,7 +953,7 @@ class App extends Component {
                 <Paragraph text="Sometimes this results in clearer code, but this style can also be abused. Like in JavaScript, it is up to you to decide whether it is worth extracting a variable for readability. Keep in mind that if the map() body is too nested, it might be a good time to extract a component." />
             </MainSection>
             <MainSection id="forms" className="main-section">
-                <h1>Forms</h1>
+                <MainSectionHeader title="Forms"/>
                 <Code
                     code={this.dedent(`
                     <form>
@@ -1202,7 +1207,7 @@ class App extends Component {
                 <Paragraph text="It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a React component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out uncontrolled components, an alternative technique for implementing input forms." />
             </MainSection>
             <MainSection id="lifting-state-up" className="main-section">
-                <h1>Lifting State Up</h1>
+                <MainSectionHeader title="Lifting State Up"/>
                 <Paragraph text="Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor. Let’s see how this works in action." />
                 <Paragraph text="In this section, we will create a temperature calculator that calculates whether the water would boil at a given temperature." />
                 <Code
@@ -1491,7 +1496,7 @@ class App extends Component {
                 <Paragraph text="When you see something wrong in the UI, you can use React Developer Tools to inspect the props and move up the tree until you find the component responsible for updating the state. This lets you trace the bugs to their source:"/>
             </MainSection>
             <MainSection id="composition-vs-inheritance" className="main-section">
-                <h1>Composition vs Inheritance</h1>
+                <MainSectionHeader title="Composition vs Inheritance" />
                 <Paragraph text="In this section, we will consider a few problems where developers new to React often reach for inheritance, and show how we can solve them with composition." />
                 <Paragraph text="React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components." />
                 <SubSectionHeader title="Containment" />
@@ -1525,6 +1530,223 @@ class App extends Component {
                     `)}
                     codeCaption="This lets other components pass arbitrary children to them by nesting the JSX:"
                 />
+                <Paragraph text="Anything inside the <FancyBorder> JSX tag gets passed into the FancyBorder component as a children prop. Since FancyBorder renders {props.children} inside a <div>, the passed elements appear in the final output." />
+                <Code
+                    code={this.dedent(`
+                    function SplitPane(props) {
+                        return (
+                            <div className="SplitPane">
+                            <div className="SplitPane-left">
+                                {props.left}
+                            </div>
+                            <div className="SplitPane-right">
+                                {props.right}
+                            </div>
+                            </div>
+                        );
+                        }
+
+                        function App() {
+                        return (
+                            <SplitPane
+                            left={
+                                <Contacts />
+                            }
+                            right={
+                                <Chat />
+                            } />
+                        );
+                    }
+                    `)}
+                    codeCaption="While this is less common, sometimes you might need multiple “holes” in a component. In such cases you may come up with your own convention instead of using children:"
+                />
+                <Paragraph text="React elements like <Contacts /> and <Chat /> are just objects, so you can pass them as props like any other data. This approach may remind you of “slots” in other libraries but there are no limitations on what you can pass as props in React." />
+                <SubSectionHeader title="Specialization" />
+                <Paragraph text="Sometimes we think about components as being “special cases” of other components. For example, we might say that a WelcomeDialog is a special case of Dialog."/>
+                <Code
+                    code={this.dedent(`
+                    function Dialog(props) {
+                        return (
+                            <FancyBorder color="blue">
+                            <h1 className="Dialog-title">
+                                {props.title}
+                            </h1>
+                            <p className="Dialog-message">
+                                {props.message}
+                            </p>
+                            </FancyBorder>
+                        );
+                        }
+
+                        function WelcomeDialog() {
+                        return (
+                            <Dialog
+                            title="Welcome"
+                            message="Thank you for visiting our spacecraft!" />
+
+                        );
+                    }
+                    `)}
+                    codeCaption="In React, this is also achieved by composition, where a more “specific” component renders a more “generic” one and configures it with props:"
+                />
+                <Code
+                    code={this.dedent(`
+                    function Dialog(props) {
+                        return (
+                            <FancyBorder color="blue">
+                                <h1 className="Dialog-title">
+                                    {props.title}
+                                </h1>
+                                <p className="Dialog-message">
+                                    {props.message}
+                                </p>
+                                {props.children}
+                            </FancyBorder>
+                        );
+                    }
+
+                    class SignUpDialog extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.handleChange = this.handleChange.bind(this);
+                            this.handleSignUp = this.handleSignUp.bind(this);
+                            this.state = {login: ''};
+                        }
+
+                        render() {
+                            return (
+                            <Dialog title="Mars Exploration Program"
+                                    message="How should we refer to you?">
+                                <input value={this.state.login}
+                                    onChange={this.handleChange} />
+
+                                <button onClick={this.handleSignUp}>
+                                    Sign Me Up!
+                                </button>
+                            </Dialog>
+                            );
+                        }
+
+                        handleChange(e) {
+                            this.setState({login: e.target.value});
+                        }
+
+                        handleSignUp() {
+                            alert('&quot;Welcome aboard, $this.state.login}!');
+                        }
+                    }
+                    `)}
+                    codeCaption="Composition works equally well for components defined as classes:"
+                />
+                <SubSectionHeader title="So What About Inheritance?" />
+                <Paragraph text="At Facebook, we use React in thousands of components, and we haven’t found any use cases where we would recommend creating component inheritance hierarchies."/>
+                <Paragraph text="Props and composition give you all the flexibility you need to customize a component’s look and behavior in an explicit and safe way. Remember that components may accept arbitrary props, including primitive values, React elements, or functions."/>
+                <Paragraph text="If you want to reuse non-UI functionality between components, we suggest extracting it into a separate JavaScript module. The components may import it and use that function, object, or a class, without extending it."/>
+            </MainSection>
+            <MainSection id="thinking-in-react" className="main-section">
+                <MainSectionHeader title="Thinking In React" />
+                <Paragraph text="React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram." />
+                <Paragraph text="One of the many great parts of React is how it makes you think about apps as you build them. In this document, we’ll walk you through the thought process of building a searchable product data table using React." />
+                <SubSectionHeader title="Start With A Mock" />
+                <figure>
+                    <figcaption>Imagine that we already have a JSON API and a mock from our designer. The mock looks like this:</figcaption>
+                    <img src={mock} alt="Shows the mock display"/>
+                </figure>
+                <Code
+                    code={this.dedent(`
+                    [
+                        {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
+                        {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
+                        {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
+                        {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
+                        {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
+                        {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
+                    ];
+                    `)}
+                    codeCaption="Our JSON API returns some data that looks like this:"
+                />
+                <SubSectionHeader title="Step 1: Break The UI Into A Component Hierarchy" />
+                <Paragraph text="The first thing you’ll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names. If you’re working with a designer, they may have already done this, so go talk to them! Their Photoshop layer names may end up being the names of your React components!" />
+                <Paragraph text="But how do you know what should be its own component? Just use the same techniques for deciding if you should create a new function or object. One such technique is the single responsibility principle, that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents." />
+                <Paragraph text="Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely. That’s because UI and data models tend to adhere to the same information architecture, which means the work of separating your UI into components is often trivial. Just break it up into components that represent exactly one piece of your data model." />
+                <figure>
+                    <img src={subcomponents} alt="Shows the outline of components"/>
+                </figure>
+                <List title="You’ll see here that we have five components in our simple app."
+                    listItems={[
+                    "1. FilterableProductTable (orange): contains the entirety of the example",
+                    "2. SearchBar (blue): receives all user input",
+                    "3. ProductTable (green): displays and filters the data collection based on user input",
+                    "4. ProductCategoryRow (turquoise): displays a heading for each category",
+                    "5. ProductRow (red): displays a row for each product"]} />
+                <Paragraph text="If you look at ProductTable, you’ll see that the table header (containing the “Name” and “Price” labels) isn’t its own component. This is a matter of preference, and there’s an argument to be made either way. For this example, we left it as part of ProductTable because it is part of rendering the data collection which is ProductTable’s responsibility. However, if this header grows to be complex (i.e. if we were to add affordances for sorting), it would certainly make sense to make this its own ProductTableHeader component." />
+                <List title="Now that we’ve identified the components in our mock, let’s arrange them into a hierarchy. This is easy. Components that appear within another component in the mock should appear as a child in the hierarchy:"
+                    listItems={[
+                        "FilterableProductTable",
+                        "SearchBar",
+                        "ProductTable",
+                        "ProductCategoryRow",
+                        "ProductRow"
+                    ]} />
+                <SubSectionHeader title="Step 2: Build A Static Version in React" />
+                <Paragraph text="See the Pen Thinking In React: Step 2 on CodePen." />
+                <Paragraph text="Now that you have your component hierarchy, it’s time to implement your app. The easiest way is to build a version that takes your data model and renders the UI but has no interactivity. It’s best to decouple these processes because building a static version requires a lot of typing and no thinking, and adding interactivity requires a lot of thinking and not a lot of typing. We’ll see why." />
+                <Paragraph text="To build a static version of your app that renders your data model, you’ll want to build components that reuse other components and pass data using props. props are a way of passing data from parent to child. If you’re familiar with the concept of state, don’t use state at all to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don’t need it." />
+                <Paragraph text="You can build top-down or bottom-up. That is, you can either start with building the components higher up in the hierarchy (i.e. starting with FilterableProductTable) or with the ones lower in it (ProductRow). In simpler examples, it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up and write tests as you build." />
+                <Paragraph text="At the end of this step, you’ll have a library of reusable components that render your data model. The components will only have render() methods since this is a static version of your app. The component at the top of the hierarchy (FilterableProductTable) will take your data model as a prop. If you make a change to your underlying data model and call ReactDOM.render() again, the UI will be updated. It’s easy to see how your UI is updated and where to make changes since there’s nothing complicated going on. React’s one-way data flow (also called one-way binding) keeps everything modular and fast." />
+                <Paragraph text="Simply refer to the React docs if you need help executing this step."/>
+                <SubSectionHeader title="A Brief Interlude: Props vs State" />
+                <Paragraph text="There are two types of “model” data in React: props and state. It’s important to understand the distinction between the two; skim the official React docs if you aren’t sure what the difference is."/>
+                <SubSectionHeader title="Step 3: Identify The Minimal (but complete) Representation Of UI State" />
+                <Paragraph text="To make your UI interactive, you need to be able to trigger changes to your underlying data model. React makes this easy with state." />
+                <Paragraph text="To build your app correctly, you first need to think of the minimal set of mutable state that your app needs. The key here is DRY: Don’t Repeat Yourself. Figure out the absolute minimal representation of the state your application needs and compute everything else you need on-demand. For example, if you’re building a TODO list, just keep an array of the TODO items around; don’t keep a separate state variable for the count. Instead, when you want to render the TODO count, simply take the length of the TODO items array." />
+                <List title="Think of all of the pieces of data in our example application. We have:"
+                    listItems={[
+                        "The original list of products",
+                        "The search text the user has entered",
+                        "The value of the checkbox",
+                        "The filtered list of products"
+                    ]} />
+                <List title="Let’s go through each one and figure out which one is state. Simply ask three questions about each piece of data:"
+                    listItems={[
+                        "1. Is it passed in from a parent via props? If so, it probably isn’t state.",
+                        "2. Does it remain unchanged over time? If so, it probably isn’t state. ",
+                        "3. Can you compute it based on any other state or props in your component? If so, it isn’t state."
+                    ]} />
+                <Paragraph text="The original list of products is passed in as props, so that’s not state. The search text and the checkbox seem to be state since they change over time and can’t be computed from anything. And finally, the filtered list of products isn’t state because it can be computed by combining the original list of products with the search text and value of the checkbox." />
+                <List title="So finally, our state is:"
+                    listItems={[
+                        "The search text the user has entered",
+                        "The value of the checkbox"
+                    ]} />
+                <SubSectionHeader title="Step 4: Identify Where Your State Should Live" />
+                <Paragraph text="See the Pen Thinking In React: Step 4 on CodePen." />
+                <Paragraph text="OK, so we’ve identified what the minimal set of app state is. Next, we need to identify which component mutates, or owns, this state." />
+                <Paragraph text="Remember: React is all about one-way data flow down the component hierarchy. It may not be immediately clear which component should own what state. This is often the most challenging part for newcomers to understand, so follow these steps to figure it out:" />
+                <List title="For each piece of state in your application:"
+                   listItems={[
+                       "Identify every component that renders something based on that state.",
+                       "Find a common owner component (a single component above all the components that need the state in the hierarchy).",
+                       "Either the common owner or another component higher up in the hierarchy should own the state.",
+                       "If you can’t find a component where it makes sense to own the state, create a new component simply for holding the state and add it somewhere in the hierarchy above the common owner component."
+                   ]} />
+                <List title="Let’s run through this strategy for our application:"
+                   listItems={[
+                       "ProductTable needs to filter the product list based on state and SearchBar needs to display the search text and checked state.",
+                       "The common owner component is FilterableProductTable.",
+                       "It conceptually makes sense for the filter text and checked value to live in FilterableProductTable"
+                   ]} />
+                <Paragraph text="Cool, so we’ve decided that our state lives in FilterableProductTable. First, add an instance property this.state = {filterText: '', inStockOnly: false} to FilterableProductTable’s constructor to reflect the initial state of your application. Then, pass filterText and inStockOnly to ProductTable and SearchBar as a prop. Finally, use these props to filter the rows in ProductTable and set the values of the form fields in SearchBar."/>
+                <Paragraph text="You can start seeing how your application will behave: set filterText to 'ball' and refresh your app. You’ll see that the data table is updated correctly." />
+                <SubSectionHeader title="Step 5: Add Inverse Data Flow" />
+                <Paragraph text="See the Pen Thinking In React: Step 5 on CodePen." />
+                <Paragraph text="So far, we’ve built an app that renders correctly as a function of props and state flowing down the hierarchy. Now it’s time to support data flowing the other way: the form components deep in the hierarchy need to update the state in FilterableProductTable." />
+                <Paragraph text="React makes this data flow explicit to make it easy to understand how your program works, but it does require a little more typing than traditional two-way data binding." />
+                <Paragraph text="If you try to type or check the box in the current version of the example, you’ll see that React ignores your input. This is intentional, as we’ve set the value prop of the input to always be equal to the state passed in from FilterableProductTable." />
+                <Paragraph text="Let’s think about what we want to happen. We want to make sure that whenever the user changes the form, we update the state to reflect the user input. Since components should only update their own state, FilterableProductTable will pass callbacks to SearchBar that will fire whenever the state should be updated. We can use the onChange event on the inputs to be notified of it. The callbacks passed by FilterableProductTable will call setState(), and the app will be updated." />
+                <Paragraph text="Though this sounds complex, it’s really just a few lines of code. And it’s really explicit how your data is flowing throughout the app." />
+                <SubSectionHeader title="And That’s It" />
+                <Paragraph text="Hopefully, this gives you an idea of how to think about building components and applications with React. While it may be a little more typing than you’re used to, remember that code is read far more than it’s written, and it’s extremely easy to read this modular, explicit code. As you start to build large libraries of components, you’ll appreciate this explicitness and modularity, and with code reuse, your lines of code will start to shrink. :)" />
             </MainSection>
         </main>
       </div>
