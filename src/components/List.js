@@ -3,12 +3,16 @@ import React, { Component } from 'react';
 import '../styles/List.css';
 
 class List extends Component {
-    constructor(props) {
-        super(props);
-        const listItems = this.props.listItems;
-        this.list = listItems.map((listItems) =>
-            <li key={listItems} >{listItems}</li>
-        );
+    displayListItems(listItems) {
+        let list = [];
+        if (Array.isArray(listItems)) {
+            listItems.map((item) =>
+                list.push(<li key={item} >{item}</li>)
+            );
+            return <span>{list}</span>;
+        } else {
+            return <li key={listItems} >{listItems}</li>;
+        }
     }
 
     render() {
@@ -16,7 +20,7 @@ class List extends Component {
             <div className="list">
                 <p><strong>{this.props.title}</strong></p>
                 <ul>
-                    {this.list}
+                    {this.displayListItems(this.props.listItems)}
                 </ul>
             </div>
         );

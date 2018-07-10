@@ -7,13 +7,8 @@ class Code extends Component {
         let codeText = [];
         if (Array.isArray(code)) {
             for (var i=0; i<code.length; i++) {
-                if (typeof code[i] === 'object') {
                 codeText.push(<span key={i} >{code[i]}</span>);
-                } else {
-                    codeText.push(<span key={i} >{code[i]}</span>);
-                }
             }
-
             return <span>{codeText}</span>
         }
         else {

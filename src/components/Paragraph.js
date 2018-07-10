@@ -7,11 +7,7 @@ class Paragraph extends Component {
         let pText = [];
         if (Array.isArray(textArr)) {
             for (var i=0; i<textArr.length; i++) {
-                if (typeof textArr[i] === 'object') {
                 pText.push(<span key={i} >{textArr[i]}</span>);
-                } else {
-                    pText.push(<span key={i} >{textArr[i]}</span>);
-                }
             }
 
             return <span>{pText}</span>

@@ -7,11 +7,7 @@ class Tip extends Component {
         let tipText = [];
         if (Array.isArray(textArr)) {
             for (var i=0; i<textArr.length; i++) {
-                if (typeof textArr[i] === 'object') {
                 tipText.push(<span key={i} >{textArr[i]}</span>);
-                } else {
-                    tipText.push(<span key={i} >{textArr[i]}</span>);
-                }
             }
             return <span>{tipText}</span>
         }
