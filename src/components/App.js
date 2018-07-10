@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import NavBar from './NavBar'
 import List from './List'
-import SectionHeader from './SectionHeader'
+import SubSectionHeader from './SubSectionHeader'
 import logo from '../images/gif-updates.gif';
 import Paragraph from './Paragraph';
 import Code from './Code';
 import ExternalLink from './ExternalLink';
 import Tip from './Tip';
+import MainSection from './MainSection';
 
 class App extends Component {
 
@@ -52,45 +53,45 @@ class App extends Component {
             <NavBar title="FAQ" /> */}
         </div>
         <main id="main-doc">
-            <section id="hello-world" className="main-section">
+            <MainSection id="hello-world" className="main-section">
                 <header>
                     <h1 id="react-doc-title">React Documentation</h1>
                     <Paragraph text="This documentation was created from https://reactjs.org/docs" />
                 </header>
-                <SectionHeader id="hw-header" title="Hello World" />
+                <SubSectionHeader id="hw-header" title="Hello World" />
                 <Code codeCaption="The smallest React example looks like this:" code={this.code[0]} />
                 <Paragraph text="It displays a heading saying “Hello, world!” on the page." />
                 <ExternalLink href="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
                 <Paragraph text="Click the link above to open an online editor. Feel free to make some changes, and see how they affect the output. Most pages in this guide will have editable examples like this one." />
                 <article id="how-to-read">
-                    <SectionHeader title="How to Read This Guide" />
+                    <SubSectionHeader title="How to Read This Guide" />
                     <Paragraph text="In this guide, we will examine the building blocks of React apps: elements and components. Once you master them, you can create complex apps from small reusable pieces" />
                     <Tip title="Tip" text={["This guide is designed for people who prefer", <strong> learning concepts step by step. </strong> , "If you prefer to learn by doing, check out our practical tutorial. You might find this guide and the tutorial complementary to each other."]} />
                     <Paragraph text="This is the first chapter in a step-by-step guide about main React concepts. You can find a list of all its chapters in the navigation sidebar. If you’re reading this from a mobile device, you can access the navigation by pressing the button in the bottom right corner of your screen." />
                     <Paragraph text={["Every chapter in this guide builds on the knowledge introduced in earlier chapters. ", <strong> You can learn most of React by reading the “Main Concepts” guide chapters in the order they appear in the sidebar. </strong>, "For example, “Introducing JSX” is the next chapter after this one."]} />
                 </article>
                 <article>
-                    <SectionHeader title="Knowledge Level Assumptions" />
+                    <SubSectionHeader title="Knowledge Level Assumptions" />
                     <Paragraph text={["React is a JavaScript library, and so we’ll assume you have a basic understanding of the JavaScript language.", <strong> If you don’t feel very confident, we recommend going through a JavaScript tutorial to check your knowledge level </strong> , "and enable you to follow along this guide without getting lost. It might take you between 30 minutes and an hour, but as a result you won’t have to feel like you’re learning both React and JavaScript at the same time."]} />
                     <Tip title="Note" text={["This guide occasionally uses some of the newer JavaScript syntax in the examples. If you haven’t worked with JavaScript in the last few years, " , <a href="https://gist.github.com/gaearon/683e676101005de0add59e8bb345340c">these three points</a> ," should get you most of the way."]} />
                 </article>
                 <article>
-                    <SectionHeader title="Let's Get Started!" />
+                    <SubSectionHeader title="Let's Get Started!" />
                     <Paragraph text={["Keep scrolling down, and you’ll find the ", <a href="#introducing-jsx">link to the next chapter</a> ," of this guide right before the website footer."]} />
                 </article>
-            </section>
-            <section id="introducing-jsx" className="main-section">
+            </MainSection>
+            <MainSection id="introducing-jsx" className="main-section">
                 <h1>Introducing JSX</h1>
                 <Code codeCaption="Consider this variable declaration:" code={this.code[1]} />
                 <Paragraph text="This funny tag syntax is neither a string nor HTML." />
                 <Paragraph text="It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript." />
                 <Paragraph text={["JSX produces React “elements”. We will explore rendering them to the DOM in the ", <a href="#rendering-elements">next section.</a>  ," Below, you can find the basics of JSX necessary to get you started."]} />
-                <SectionHeader title="Why JSX?" />
+                <SubSectionHeader title="Why JSX?" />
                 <Paragraph text="React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display." />
                 <Paragraph text={["Instead of artificially separating technologies by putting markup and logic in separate files, React " , <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separates concerns</a>  , " with loosely coupled units called “components” that contain both. We will come back to components in a " , <a href="#components-and-props">further section</a>  , " but if you’re not yet comfortable putting markup in JS, " , <a href="https://www.youtube.com/watch?v=x7cQ3mrcKaY">this talk</a>  , " might convince you otherwise."]} />
                 <Paragraph text={["React " , <a href="#react-withou-jsx">doesn't require</a>  , " using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages."]} />
                 <Paragraph text="With that out of the way, let’s get started!" />
-                <SectionHeader title="Embedding Expressions in JSX" />
+                <SubSectionHeader title="Embedding Expressions in JSX" />
                 <Paragraph text={["In the example below, we declare a variable called " , <code> name </code> , " and then use it inside JSX by wrapping it in curly braces:"]} />
                 <Code code={this.code[2]} captionClass="no-caption"/>
                 <Paragraph text={["You can put any valid " , <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions">JavaScript expression</a> , " inside the curly braces in JSX. For example, " , <code>2 + 2, user.firstName</code> , " , or " , <code>formatName(user)</code> , " are all valid JavaScript expressions."]} />
@@ -98,27 +99,27 @@ class App extends Component {
                 <Code code={this.code[3]} captionClass="no-caption" />
                 <ExternalLink href="https://codepen.io/pen?&editors=0010" linkText="Try it on CodePen" />
                 <Paragraph text={["We split JSX over multiple lines for readability. While it isn’t required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of " , <a href="https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi">automatic semicolon insertion</a> ]} />
-                <SectionHeader title="JSX is an Expression Too" />
+                <SubSectionHeader title="JSX is an Expression Too" />
                 <Paragraph text="After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects." />
                 <Paragraph text="This means that you can use JSX inside of if statements and for loops, assign it to variables, accept it as arguments, and return it from functions:" />
                 <Code code={this.code[4]} captionClass="no-caption" />
-                <SectionHeader title="Specifying Attributes with JSX" />
+                <SubSectionHeader title="Specifying Attributes with JSX" />
                 <Paragraph text="You may use quotes to specify string literals as attributes:" />
                 <Code code={this.code[5]} captionClass="no-caption" />
                 <Paragraph text="You may also use curly braces to embed a JavaScript expression in an attribute:" />
                 <Code code={this.code[6]} captionClass="no-caption" />
                 <Paragraph text="Don’t put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute." />
                 <Tip title="Warning" text={["Since JSX is closer to JavaScript than to HTML, React DOM uses camelCase property naming convention instead of HTML attribute names." , <br/> , <br/> , " For example, class becomes " , <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className">className</a> , " in JSX, and tabindex becomes " , <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex">tabIndex</a> ]} />
-                <SectionHeader title="Specifying Children with JSX" />
+                <SubSectionHeader title="Specifying Children with JSX" />
                 <Paragraph text="If a tag is empty, you may close it immediately with />, like XML:" />
                 <Code code={this.code[7]} captionClass="no-caption" />
                 <Paragraph text="JSX tags may contain children:" />
                 <Code code={this.code[8]} captionClass="no-caption" />
-                <SectionHeader title="JSX Prevents Injection Attacks" />
+                <SubSectionHeader title="JSX Prevents Injection Attacks" />
                 <Paragraph text="It is safe to embed user input in JSX:" />
                 <Code code={this.code[9]} captionClass="no-caption" />
                 <Paragraph text={["By default, React DOM " , <a href="https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html">escapes</a> , " any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent " , <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">XSS (cross-site-scripting) </a> , " attacks."]} />
-                <SectionHeader title="JSX Represents Objects" />
+                <SubSectionHeader title="JSX Represents Objects" />
                 <Paragraph text={["Babel compiles JSX down to " , <code>React.createElement()</code> , " calls."]} />
                 <Paragraph text="These two examples are identical:" />
                 <Code code={this.code[10]} captionClass="no-caption" />
@@ -128,27 +129,27 @@ class App extends Component {
                 <Paragraph text="These objects are called “React elements”. You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date." />
                 <Paragraph text="We will explore rendering React elements to the DOM in the next section." />
                 <Tip title="Tip" text={["We recommend using the " , <a href="http://babeljs.io/docs/editors">“Babel” language definition</a> , " for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the " , <a href="https://labs.voronianski.com/oceanic-next-color-scheme/">Oceanic Next</a> , " color scheme which is compatible with it."]} />
-            </section>
-            <section id="rendering-elements" className="main-section">
+            </MainSection>
+            <MainSection id="rendering-elements" className="main-section">
                 <h1>Rendering Elements</h1>
                 <Paragraph text="Elements are the smallest building blocks of React apps." />
                 <Code code={this.code[13]} codeCaption="An element describes what you want to see on the screen:" />
                 <Paragraph text="Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements." />
                 <Tip title="Note:" text={["One might confuse elements with a more widely known concept of “components”. We will introduce components in the " , <a href="#components-and-props" > next section. </a> , " Elements are what components are “made of”, and we encourage you to read this section before jumping ahead."]} />
-                <SectionHeader title="Rendering an Element into the DOM" />
+                <SubSectionHeader title="Rendering an Element into the DOM" />
                 <Code code={this.code[14]} codeCaption="Let’s say there is a <div> somewhere in your HTML file:" />
                 <Paragraph text={["We call this a “root” DOM node because everything inside it will be managed by React DOM." , <br></br> , <br></br> , "Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like." , <br></br> , <br></br> , "To render a React element into a root DOM node, pass both to ReactDOM.render():"]} />
                 <Code code={this.code[15]} captionClass="no-caption" />
                 <ExternalLink href="https://reactjs.org/redirect-to-codepen/rendering-elements/render-an-element" linkText="Try it on CodePen" />
                 <Paragraph text="It displays “Hello, world” on the page." />
-                <SectionHeader title="Updating the Rendered Element" />
+                <SubSectionHeader title="Updating the Rendered Element" />
                 <Paragraph text={["React elements are " , <a href="https://en.wikipedia.org/wiki/Immutable_object" >immutable.</a> , " Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time."]} />
                 <Paragraph text="With our knowledge so far, the only way to update the UI is to create a new element, and pass it to ReactDOM.render()." />
                 <Code code={this.code[16]} codeCaption="Consider this ticking clock example:" />
                 <ExternalLink href="https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element" linkText="Try it on CodePen" />
                 <Paragraph text="It calls ReactDOM.render() every second from a setInterval() callback." />
                 <Tip title="Note:" text={["In practice, most React apps only call ReactDOM.render() once. In the next sections we will learn how such code gets encapsulated into stateful components. " , <br></br> , <br></br> , " We recommend that you don’t skip topics because they build on each other."]} />
-                <SectionHeader title="React Only Updates What’s Necessary" />
+                <SubSectionHeader title="React Only Updates What’s Necessary" />
                 <Paragraph text="React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state." />
                 <Paragraph text="You can verify by inspecting the last example with the browser tools:" />
                 <Paragraph text="Even though we create an element describing the whole UI tree on every tick, only the text node whose contents has changed gets updated by React DOM." />
@@ -156,18 +157,18 @@ class App extends Component {
                     <img src={logo} alt="DOM inspector showing granular updates" />
                 </div>
                 <Paragraph text="In our experience, thinking about how the UI should look at any given moment rather than how to change it over time eliminates a whole class of bugs." />
-            </section>
-            <section id="components-and-props" className="main-section">
+            </MainSection>
+            <MainSection id="components-and-props" className="main-section">
                 <h1>Components and Props</h1>
                 <Paragraph text={["Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a " , <a href="https://reactjs.org/docs/react-component.html" >detailed component API reference here.</a>]} />
                 <Paragraph text="Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen." />
-                <SectionHeader title="Functional and Class Components" />
+                <SubSectionHeader title="Functional and Class Components" />
                 <Code codeCaption="The simplest way to define a component is to write a JavaScript function:" code={this.code[17]} />
                 <Paragraph text="This function is a valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “functional” because they are literally JavaScript functions." />
                 <Code codeCaption="You can also use an ES6 class to define a component:" code={this.code[18]} />
                 <Paragraph text="The above two components are equivalent from React’s point of view." />
                 <Paragraph text="Classes have some additional features that we will discuss in the next sections. Until then, we will use functional components for their conciseness." />
-                <SectionHeader title="Rendering a Component" />
+                <SubSectionHeader title="Rendering a Component" />
                 <Code code="const element = <div />;" codeCaption="Previously, we only encountered React elements that represent DOM tags:" />
                 <Code code='const element = <Welcome name="Sara" />;' codeCaption="However, elements can also represent user-defined components:" />
                 <Paragraph text="When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object “props”." />
@@ -175,12 +176,12 @@ class App extends Component {
                 <ExternalLink linkText="Try it on CodePen" href="codepen.io"/>
                 <List title="Let’s recap what happens in this example:" listItems={["We call ReactDOM.render() with the <Welcome name='Sara' /> element.", "React calls the Welcome component with {name: 'Sara'} as the props." , "Our Welcome component returns a <h1>Hello, Sara</h1> element as the result." , "React DOM efficiently updates the DOM to match <h1>Hello, Sara</h1>."]} />
                 <Tip title="Note: Always start component names with a capital letter." text="React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope." />
-                <SectionHeader title="Composing Components" />
+                <SubSectionHeader title="Composing Components" />
                 <Paragraph text="Components can refer to other components in their output. This lets us use the same component abstraction for any level of detail. A button, a form, a dialog, a screen: in React apps, all those are commonly expressed as components." />
                 <Code code={this.code[20]} codeCaption="For example, we can create an App component that renders Welcome many times:" />
                 <ExternalLink linkText="Try it on CodePen" href="codepen.io" />
                 <Paragraph text="Typically, new React apps have a single App component at the very top. However, if you integrate React into an existing app, you might start bottom-up with a small component like Button and gradually work your way to the top of the view hierarchy." />
-                <SectionHeader title="Extracting Components" />
+                <SubSectionHeader title="Extracting Components" />
                 <Paragraph text="Don’t be afraid to split components into smaller components." />
                 <Code codeCaption="For example, consider this Comment component:" code={this.code[21]} />
                 <Paragraph text="It accepts author (an object), text (a string), and date (a date) as props, and describes a comment on a social media website."/>
@@ -192,7 +193,7 @@ class App extends Component {
                 <Code code={this.code[24]} codeCaption="Next, we will extract a UserInfo component that renders an Avatar next to the user’s name:" />
                 <Code code={this.code[25]} codeCaption="This lets us simplify Comment even further:" />
                 <Paragraph text="Extracting components might seem like grunt work at first, but having a palette of reusable components pays off in larger apps. A good rule of thumb is that if a part of your UI is used several times (Button, Panel, Avatar), or is complex enough on its own (App, FeedStory, Comment), it is a good candidate to be a reusable component." />
-                <SectionHeader title="Props are Read-Only" />
+                <SubSectionHeader title="Props are Read-Only" />
                 <Paragraph text="Whether you declare a component as a function or a class, it must never modify its own props. " />
                 <Code code={this.code[26]} codeCaption="Consider this sum function:" />
                 <Paragraph text="Such functions are called “pure” because they do not attempt to change their inputs, and always return the same result for the same inputs." />
@@ -200,8 +201,8 @@ class App extends Component {
                 <Paragraph text="React is pretty flexible but it has a single strict rule:" />
                 <Paragraph text={[<strong>All React components must act like pure functions with respect to their props.</strong>]} />
                 <Paragraph text="Of course, application UIs are dynamic and change over time. In the next section, we will introduce a new concept of “state”. State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule." />
-           </section>
-           <section id="state-and-lifecycle" className="main-section">
+           </MainSection>
+           <MainSection id="state-and-lifecycle" className="main-section">
                 <h1>State and Lifecycle</h1>
                 <Paragraph text={["This page introduces the concept of state and lifecycle in a React component. You can find a " , <ExternalLink secondClassName="no-margin" linkText="detailed component API reference here." href="https://reactjs.org/docs/react-component.html" /> ]} />
                 <Paragraph text="Consider the ticking clock example from one of the previous sections. In Rendering Elements, we have only learned one way to update the UI. We call ReactDOM.render() to change the rendered output:" />
@@ -213,12 +214,12 @@ class App extends Component {
                 <Paragraph text="However, it misses a crucial requirement: the fact that the Clock sets up a timer and updates the UI every second should be an implementation detail of the Clock." />
                 <Code code={this.code[30]} codeCaption="Ideally we want to write this once and have the Clock update itself:" />
                 <Paragraph text={[ "To implement this, we need to add state to the Clock component. " , <br></br> , <br></br> , "State is similar to props, but it is private and fully controlled by the component. " ,  <br></br> , <br></br> , " We mentioned before that components defined as classes have some additional features. Local state is exactly that: a feature available only to classes."]} />
-                <SectionHeader title="Converting a Function to a Class" />
+                <SubSectionHeader title="Converting a Function to a Class" />
                 <List title="You can convert a functional component like Clock to a class in five steps:" listItems={["Create an ES6 class, with the same name, that extends React.Component." , "Add a single empty method to it called render()." , "Move the body of the function into the render() method.", "Replace props with this.props in the render() body." , "Delete the remaining empty function declaration."]} />
                 <Code code={this.code[31]} captionClass="no-caption" />
                 <ExternalLink linkText="Try it on CodePen" href="codepen.io"/>
                 <Paragraph text="Clock is now defined as a class rather than a function. The render method will be called each time an update happens, but as long as we render <Clock /> into the same DOM node, only a single instance of the Clock class will be used. This lets us use additional features such as local state and lifecycle hooks." />
-                <SectionHeader title="Adding Local State to a Class" />
+                <SubSectionHeader title="Adding Local State to a Class" />
                 <Paragraph text="We will move the date from props to state in three steps:" />
                 <Code code={this.code[32]} codeCaption="1. Replace this.props.date with this.state.date in the render() method:" />
                 <Code code={this.code[33]} codeCaption="2 Add a class constructor that assigns the initial this.state:" />
@@ -229,7 +230,7 @@ class App extends Component {
                 <Code code={this.code[36]} codeCaption="The result looks like this:" />
                 <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/KgQpJd?editors=0010"/>
                 <Paragraph text="Next, we’ll make the Clock set up its own timer and update itself every second." />
-                <SectionHeader title="Adding Lifecycle Methods to a Class" />
+                <SubSectionHeader title="Adding Lifecycle Methods to a Class" />
                 <Paragraph text="In applications with many components, it’s very important to free up resources taken by the components when they are destroyed." />
                 <Paragraph text={["We want to " , <ExternalLink secondClassName="no-margin" linkText="setup a timer " href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval" /> , " whenever the Clock is rendered to the DOM for the first time. This is called “mounting” in React."]} />
                 <Paragraph text={["We also want to " ,  <ExternalLink secondClassName="no-margin" linkText="clear that timer" href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval" /> , " whenever the DOM produced by the Clock is removed. This is called “unmounting” in React."]} />
@@ -244,19 +245,19 @@ class App extends Component {
                 <ExternalLink linkText="Try it on Codepen" href="https://codepen.io/gaearon/pen/amqdNA?editors=0010" />
                 <Paragraph text="Now the clock ticks every second." />
                 <List title="Let’s quickly recap what’s going on and the order in which the methods are called:" listItems={["1. When <Clock /> is passed to ReactDOM.render(), React calls the constructor of the Clock component. Since Clock needs to display the current time, it initializes this.state with an object including the current time. We will later update this state.","2. React then calls the Clock component’s render() method. This is how React learns what should be displayed on the screen. React then updates the DOM to match the Clock’s render output." , "3. When the Clock output is inserted in the DOM, React calls the componentDidMount() lifecycle hook. Inside it, the Clock component asks the browser to set up a timer to call the component’s tick() method once a second." , "4. Every second the browser calls the tick() method. Inside it, the Clock component schedules a UI update by calling setState() with an object containing the current time. Thanks to the setState() call, React knows the state has changed, and calls the render() method again to learn what should be on the screen. This time, this.state.date in the render() method will be different, and so the render output will include the updated time. React updates the DOM accordingly.", "5 If the Clock component is ever removed from the DOM, React calls the componentWillUnmount() lifecycle hook so the timer is stopped."]} />
-                <SectionHeader title="Using State Correctly" />
+                <SubSectionHeader title="Using State Correctly" />
                 <Paragraph text="There are three things you should know about setState()." />
                 <Paragraph text={<strong>Do Not Modify State Directly</strong>} />
                 <Code code={["// Wrong", <br></br> ," this.state.comment = 'Hello';"]} codeCaption="For example, this will not re-render a component:" />
                 <Code code={["// Correct", <br></br> ,"this.setState({comment: 'Hello'});"]} codeCaption="Instead, use setState():" />
                 <Paragraph text="The only place where you can assign this.state is the constructor." />
-                <SectionHeader title="State Updates May Be Asynchronous" />
+                <SubSectionHeader title="State Updates May Be Asynchronous" />
                 <Paragraph text="React may batch multiple setState() calls into a single update for performance." />
                 <Paragraph text="Because this.props and this.state may be updated asynchronously, you should not rely on their values for calculating the next state." />
                 <Code code={this.code[41]} codeCaption="For example, this code may fail to update the counter:" />
                 <Code code={this.code[42]} codeCaption="To fix it, use a second form of setState() that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument:" />
                 <Code code={this.code[43]} codeCaption="We used an arrow function above, but it also works with regular functions:" />
-                <SectionHeader title="State Updates are Merged" />
+                <SubSectionHeader title="State Updates are Merged" />
                 <Paragraph text="When you call setState(), React merges the object you provide into the current state." />
                 <Code code={this.code[44]} codeCaption="For example, your state may contain several independent variables:" />
                 <Code   codeCaption="Then you can update them independently with separate setState() calls:"
@@ -277,7 +278,7 @@ class App extends Component {
                             }
                     `).trim()} />
                 <Paragraph text="The merging is shallow, so this.setState({comments}) leaves this.state.posts intact, but completely replaces this.state.comments." />
-                <SectionHeader title="The Data Flows Down" />
+                <SubSectionHeader title="The Data Flows Down" />
                 <Paragraph text="Neither parent nor child components can know if a certain component is stateful or stateless, and they shouldn’t care whether it is defined as a function or a class." />
                 <Paragraph text="This is why state is often called local or encapsulated. It is not accessible to any component other than the one that owns and sets it." />
                 <Code
@@ -321,8 +322,8 @@ class App extends Component {
                 <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
                 <Paragraph text="Each Clock sets up its own timer and updates independently." />
                 <Paragraph text="In React apps, whether a component is stateful or stateless is considered an implementation detail of the component that may change over time. You can use stateless components inside stateful components, and vice versa." />
-           </section>
-           <section id="handling-events" className="main-section">
+           </MainSection>
+           <MainSection id="handling-events" className="main-section">
                <h1>Handling Events</h1>
                <List title="Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic differences:"
                      listItems={["React events are named using camelCase, rather than lowercase.", "With JSX you pass a function as the event handler, rather than a string."]}
@@ -447,7 +448,7 @@ class App extends Component {
                     codeCaption="If you aren’t using class fields syntax, you can use an arrow function in the callback:"
                 />
                 <Paragraph text="The problem with this syntax is that a different callback is created each time the LoggingButton renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem." />
-                <SectionHeader title="Passing Arguments to Event Handlers" />
+                <SubSectionHeader title="Passing Arguments to Event Handlers" />
                 <Code
                     code={this.dedent(`
                     <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
@@ -456,8 +457,8 @@ class App extends Component {
                     codeCaption="Inside a loop it is common to want to pass an extra parameter to an event handler. For example, if id is the row ID, either of the following would work:"
                 />
                 <Paragraph text="The above two lines are equivalent, and use arrow functions and Function.prototype.bind respectively. In both cases, the e argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded." />
-           </section>
-           <section id="conditional-rendering" className="main-section">
+           </MainSection>
+           <MainSection id="conditional-rendering" className="main-section">
                 <h1>Conditional Rendering</h1>
                 <Paragraph text="In React, you can create distinct components that encapsulate behavior you need. Then, you can render only some of them, depending on the state of your application." />
                 <Paragraph text="Conditional rendering in React works the same way conditions work in JavaScript. Use JavaScript operators like if or the conditional operator to create elements representing the current state, and let React update the UI to match them." />
@@ -493,7 +494,7 @@ class App extends Component {
                 />
                 <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
                 <Paragraph text="This example renders a different greeting depending on the value of isLoggedIn prop." />
-                <SectionHeader title="Element Variables" />
+                <SubSectionHeader title="Element Variables" />
                 <Paragraph text="You can use variables to store elements. This can help you conditionally render a part of the component while the rest of the output doesn’t change." />
                 <Code
                     code={this.dedent(`
@@ -562,7 +563,7 @@ class App extends Component {
                 />
                 <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
                 <Paragraph text="While declaring a variable and using an if statement is a fine way to conditionally render a component, sometimes you might want to use a shorter syntax. There are a few ways to inline conditions in JSX, explained below." />
-                <SectionHeader title="Inline If with Logical && Operator"  />
+                <SubSectionHeader title="Inline If with Logical && Operator"  />
                 <Code
                     code={this.dedent(`
                     function Mailbox(props) {
@@ -591,7 +592,7 @@ class App extends Component {
                 <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
                 <Paragraph text="It works because in JavaScript, true && expression always evaluates to expression, and false && expression always evaluates to false." />
                 <Paragraph text="Therefore, if the condition is true, the element right after && will appear in the output. If it is false, React will ignore and skip it." />
-                <SectionHeader title="Inline If-Else with Conditional Operator" />
+                <SubSectionHeader title="Inline If-Else with Conditional Operator" />
                 <Paragraph text="Another method for conditionally rendering elements inline is to use the JavaScript conditional operator condition ? true : false." />
                 <Code
                     code={this.dedent(`
@@ -624,7 +625,7 @@ class App extends Component {
                     codeCaption="It can also be used for larger expressions although it is less obvious what’s going on:"
                 />
                 <Paragraph text="Just like in JavaScript, it is up to you to choose an appropriate style based on what you and your team consider more readable. Also remember that whenever conditions become too complex, it might be a good time to extract a component." />
-                <SectionHeader title="Preventing Component from Rendering" />
+                <SubSectionHeader title="Preventing Component from Rendering" />
                 <Paragraph text="In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output." />
                 <Code
                     code={this.dedent(`
@@ -673,828 +674,858 @@ class App extends Component {
                     codeCaption="In the example below, the <WarningBanner /> is rendered depending on the value of the prop called warn. If the value of the prop is false, then the component does not render:"
                 />
                 <Paragraph text="Returning null from a component’s render method does not affect the firing of the component’s lifecycle methods. For instance componentDidUpdate will still be called." />
-                <section id="lists-and-keys" className="main-section">
-                    <h1>Lists and Keys</h1>
-                    <Paragraph text="First, let’s review how you transform lists in JavaScript." />
-                    <Code
-                        code={this.dedent(
-                        `const numbers = [1, 2, 3, 4, 5];
-                        const doubled = numbers.map((number) => number * 2);
-                        console.log(doubled);
-                        `)}
-                    codeCaption="Given the code below, we use the map() function to take an array of numbers and double their values. We assign the new array returned by map() to the variable doubled and log it:"
-                    />
-                    <Paragraph text="This code logs [2, 4, 6, 8, 10] to the console." />
-                    <Paragraph text="In React, transforming arrays into lists of elements is nearly identical." />
-                    <SectionHeader title="Rendering Multiple Components" />
-                    <Paragraph text="You can build collections of elements and include them in JSX using curly braces {}." />
-                    <Code
-                        code={this.dedent(`
-                        const numbers = [1, 2, 3, 4, 5];
+            </MainSection>
+            <MainSection id="lists-and-keys" className="main-section">
+                <h1>Lists and Keys</h1>
+                <Paragraph text="First, let’s review how you transform lists in JavaScript." />
+                <Code
+                    code={this.dedent(
+                    `const numbers = [1, 2, 3, 4, 5];
+                    const doubled = numbers.map((number) => number * 2);
+                    console.log(doubled);
+                    `)}
+                codeCaption="Given the code below, we use the map() function to take an array of numbers and double their values. We assign the new array returned by map() to the variable doubled and log it:"
+                />
+                <Paragraph text="This code logs [2, 4, 6, 8, 10] to the console." />
+                <Paragraph text="In React, transforming arrays into lists of elements is nearly identical." />
+                <SubSectionHeader title="Rendering Multiple Components" />
+                <Paragraph text="You can build collections of elements and include them in JSX using curly braces {}." />
+                <Code
+                    code={this.dedent(`
+                    const numbers = [1, 2, 3, 4, 5];
+                    const listItems = numbers.map((number) =>
+                        <li>{number}</li>
+                    );
+                    `)}
+                    codeCaption="Below, we loop through the numbers array using the JavaScript map() function. We return an <li> element for each item. Finally, we assign the resulting array of elements to listItems:"
+                />
+                <Code
+                    code={this.dedent(`
+                    ReactDOM.render(
+                        <ul>{listItems}</ul>,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="We include the entire listItems array inside a <ul> element, and render it to the DOM:"
+                />
+                <Paragraph text="This code displays a bullet list of numbers between 1 and 5." />
+                <SubSectionHeader title="Basic List Component" />
+                <Paragraph text="Usually you would render lists inside a component." />
+                <Code
+                    code={this.dedent(`
+                    function NumberList(props) {
+                        const numbers = props.numbers;
                         const listItems = numbers.map((number) =>
                             <li>{number}</li>
                         );
-                        `)}
-                        codeCaption="Below, we loop through the numbers array using the JavaScript map() function. We return an <li> element for each item. Finally, we assign the resulting array of elements to listItems:"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        ReactDOM.render(
-                            <ul>{listItems}</ul>,
-                            document.getElementById('root')
+                        return (
+                            <ul>{listItems}</ul>
                         );
-                        `)}
-                        codeCaption="We include the entire listItems array inside a <ul> element, and render it to the DOM:"
-                    />
-                    <Paragraph text="This code displays a bullet list of numbers between 1 and 5." />
-                    <SectionHeader title="Basic List Component" />
-                    <Paragraph text="Usually you would render lists inside a component." />
-                    <Code
-                        code={this.dedent(`
-                        function NumberList(props) {
-                            const numbers = props.numbers;
-                            const listItems = numbers.map((number) =>
-                                <li>{number}</li>
-                            );
-                            return (
-                                <ul>{listItems}</ul>
-                            );
-                        }
+                    }
 
-                       const numbers = [1, 2, 3, 4, 5];
-                        ReactDOM.render(
-                            <NumberList numbers={numbers} />,
-                            document.getElementById('root')
-                        );
-                        `)}
-                        codeCaption="We can refactor the previous example into a component that accepts an array of numbers and outputs an unordered list of elements."
-                    />
-                    <Paragraph text="When you run this code, you’ll be given a warning that a key should be provided for list items. A “key” is a special string attribute you need to include when creating lists of elements. We’ll discuss why it’s important in the next section." />
-                    <Code
-                        code={this.dedent(`
-                        function NumberList(props) {
-                            const numbers = props.numbers;
-                            const listItems = numbers.map((number) =>
-                                <li key={number.toString()}>
-                                {number}
-                                </li>
-                            );
-                            return (
-                                <ul>{listItems}</ul>
-                            );
-                        }
-
-                       const numbers = [1, 2, 3, 4, 5];
-                        ReactDOM.render(
-                            <NumberList numbers={numbers} />,
-                            document.getElementById('root')
-                        );
-                        `)}
-                        codeCaption="Let’s assign a key to our list items inside numbers.map() and fix the missing key issue."
-                    />
-                    <SectionHeader title="Keys" />
-                    <Code
-                        code={this.dedent(`
-                        const numbers = [1, 2, 3, 4, 5];
+                    const numbers = [1, 2, 3, 4, 5];
+                    ReactDOM.render(
+                        <NumberList numbers={numbers} />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="We can refactor the previous example into a component that accepts an array of numbers and outputs an unordered list of elements."
+                />
+                <Paragraph text="When you run this code, you’ll be given a warning that a key should be provided for list items. A “key” is a special string attribute you need to include when creating lists of elements. We’ll discuss why it’s important in the next section." />
+                <Code
+                    code={this.dedent(`
+                    function NumberList(props) {
+                        const numbers = props.numbers;
                         const listItems = numbers.map((number) =>
-                        <li key={number.toString()}>
+                            <li key={number.toString()}>
                             {number}
-                        </li>
-                        );
-                        `)}
-                        codeCaption="Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        const todoItems = todos.map((todo) =>
-                            <li key={todo.id}>
-                                {todo.text}
                             </li>
                         );
-                        `)}
-                        codeCaption="The best way to pick a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data as keys:"
-                    />
-                    <Code
+                        return (
+                            <ul>{listItems}</ul>
+                        );
+                    }
+
+                    const numbers = [1, 2, 3, 4, 5];
+                    ReactDOM.render(
+                        <NumberList numbers={numbers} />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="Let’s assign a key to our list items inside numbers.map() and fix the missing key issue."
+                />
+                <SubSectionHeader title="Keys" />
+                <Code
                     code={this.dedent(`
-                    const todoItems = todos.map((todo, index) =>
-                        // Only do this if items have no stable IDs
-                        <li key={index}>
+                    const numbers = [1, 2, 3, 4, 5];
+                    const listItems = numbers.map((number) =>
+                    <li key={number.toString()}>
+                        {number}
+                    </li>
+                    );
+                    `)}
+                    codeCaption="Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:"
+                />
+                <Code
+                    code={this.dedent(`
+                    const todoItems = todos.map((todo) =>
+                        <li key={todo.id}>
                             {todo.text}
                         </li>
                     );
-                        `)}
-                        codeCaption="When you don’t have stable IDs for rendered items, you may use the item index as a key as a last resort:"
-                    />
-                    <Paragraph text={["We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state. Check out Robin Pokorny’s article for an " , <ExternalLink secondClassName="no-margin" linkText=" in-depth explanation on the negative impacts of using an index as a key." href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318" /> , "If you choose not to assign an explicit key to list items then React will default to using indexes as keys."]} />
-                    <Paragraph text={["Here is an " , <ExternalLink href="https://reactjs.org/docs/reconciliation.html#recursing-on-children" linkText="in-depth explanation about why keys are necessary" secondClassName="no-margin" /> , " if you’re interested in learning more."]} />
-                    <SectionHeader title="Extracting Components with Keys" />
-                    <Paragraph text="Keys only make sense in the context of the surrounding array." />
-                    <Paragraph text="For example, if you extract a ListItem component, you should keep the key on the <ListItem /> elements in the array rather than on the <li> element in the ListItem itself." />
-                    <Code
-                        code={this.dedent(`
-                        function ListItem(props) {
-                            const value = props.value;
-                            return (
-                                // Wrong! There is no need to specify the key here:
-                                <li key={value.toString()}>
-                                    {value}
-                                </li>
-                            );
-                        }
-
-                       function NumberList(props) {
-                            const numbers = props.numbers;
-                            const listItems = numbers.map((number) =>
-                                // Wrong! The key should have been specified here:
-                                <ListItem value={number} />
-                            );
-                            return (
-                                <ul>
-                                {listItems}
-                                </ul>
-                            );
-                        }
-
-                       const numbers = [1, 2, 3, 4, 5];
-                        ReactDOM.render(
-                            <NumberList numbers={numbers} />,
-                            document.getElementById('root')
+                    `)}
+                    codeCaption="The best way to pick a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data as keys:"
+                />
+                <Code
+                code={this.dedent(`
+                const todoItems = todos.map((todo, index) =>
+                    // Only do this if items have no stable IDs
+                    <li key={index}>
+                        {todo.text}
+                    </li>
+                );
+                    `)}
+                    codeCaption="When you don’t have stable IDs for rendered items, you may use the item index as a key as a last resort:"
+                />
+                <Paragraph text={["We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state. Check out Robin Pokorny’s article for an " , <ExternalLink secondClassName="no-margin" linkText=" in-depth explanation on the negative impacts of using an index as a key." href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318" /> , "If you choose not to assign an explicit key to list items then React will default to using indexes as keys."]} />
+                <Paragraph text={["Here is an " , <ExternalLink href="https://reactjs.org/docs/reconciliation.html#recursing-on-children" linkText="in-depth explanation about why keys are necessary" secondClassName="no-margin" /> , " if you’re interested in learning more."]} />
+                <SubSectionHeader title="Extracting Components with Keys" />
+                <Paragraph text="Keys only make sense in the context of the surrounding array." />
+                <Paragraph text="For example, if you extract a ListItem component, you should keep the key on the <ListItem /> elements in the array rather than on the <li> element in the ListItem itself." />
+                <Code
+                    code={this.dedent(`
+                    function ListItem(props) {
+                        const value = props.value;
+                        return (
+                            // Wrong! There is no need to specify the key here:
+                            <li key={value.toString()}>
+                                {value}
+                            </li>
                         );
-                        `)}
-                        codeCaption="Example: Incorrect Key Usage"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        function ListItem(props) {
-                            // Correct! There is no need to specify the key here:
-                            return <li>{props.value}</li>;
-                        }
+                    }
 
-                       function NumberList(props) {
-                            const numbers = props.numbers;
-                            const listItems = numbers.map((number) =>
-                                // Correct! Key should be specified inside the array.
-                                <ListItem key={number.toString()}
-                                        value={number} />
-                            );
-                            return (
-                                <ul>
-                                    {listItems}
-                                </ul>
-                            );
-                        }
+                    function NumberList(props) {
+                        const numbers = props.numbers;
+                        const listItems = numbers.map((number) =>
+                            // Wrong! The key should have been specified here:
+                            <ListItem value={number} />
+                        );
+                        return (
+                            <ul>
+                            {listItems}
+                            </ul>
+                        );
+                    }
 
-                       const numbers = [1, 2, 3, 4, 5];
-                        ReactDOM.render(
+                    const numbers = [1, 2, 3, 4, 5];
+                    ReactDOM.render(
                         <NumberList numbers={numbers} />,
-                            document.getElementById('root')
-                        );
-                        `)}
-                        codeCaption="Example: Correct Key Usage!"
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
-                    <Paragraph text="A good rule of thumb is that elements inside the map() call need keys." />
-                    <SectionHeader title="Keys Must Only Be Unique Among Siblings" />
-                    <Code
-                        code={this.dedent(`
-                        function Blog(props) {
-                            const sidebar = (
-                                <ul>
-                                {props.posts.map((post) =>
-                                    <li key={post.id}>
-                                    {post.title}
-                                    </li>
-                                )}
-                                </ul>
-                            );
-                            const content = props.posts.map((post) =>
-                                <div key={post.id}>
-                                <h3>{post.title}</h3>
-                                <p>{post.content}</p>
-                                </div>
-                            );
-                            return (
-                                <div>
-                                {sidebar}
-                                <hr />
-                                {content}
-                                </div>
-                            );
-                        }
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="Example: Incorrect Key Usage"
+                />
+                <Code
+                    code={this.dedent(`
+                    function ListItem(props) {
+                        // Correct! There is no need to specify the key here:
+                        return <li>{props.value}</li>;
+                    }
 
-                        const posts = [
-                        {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
-                        {id: 2, title: 'Installation', content: 'You can install React from npm.'}
-                        ];
-                        ReactDOM.render(
-                            <Blog posts={posts} />,
-                            document.getElementById('root')
+                    function NumberList(props) {
+                        const numbers = props.numbers;
+                        const listItems = numbers.map((number) =>
+                            // Correct! Key should be specified inside the array.
+                            <ListItem key={number.toString()}
+                                    value={number} />
                         );
-                        `)}
-                        codeCaption="Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique. We can use the same keys when we produce two different arrays:"
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
-                    <Code
-                        code={this.dedent(`
-                        const content = posts.map((post) =>
-                        <Post
-                            key={post.id}
-                            id={post.id}
-                            title={post.title} />
+                        return (
+                            <ul>
+                                {listItems}
+                            </ul>
                         );
-                        `)}
-                        codeCaption="Keys serve as a hint to React but they don’t get passed to your components. If you need the same value in your component, pass it explicitly as a prop with a different name:"
-                    />
-                    <Paragraph text="With the example above, the Post component can read props.id, but not props.key." />
-                    <SectionHeader title="Embedding map() in JSX" />
-                    <Code
-                        code={this.dedent(`
-                        function NumberList(props) {
-                            const numbers = props.numbers;
-                            const listItems = numbers.map((number) =>
+                    }
+
+                    const numbers = [1, 2, 3, 4, 5];
+                    ReactDOM.render(
+                    <NumberList numbers={numbers} />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="Example: Correct Key Usage!"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="A good rule of thumb is that elements inside the map() call need keys." />
+                <SubSectionHeader title="Keys Must Only Be Unique Among Siblings" />
+                <Code
+                    code={this.dedent(`
+                    function Blog(props) {
+                        const sidebar = (
+                            <ul>
+                            {props.posts.map((post) =>
+                                <li key={post.id}>
+                                {post.title}
+                                </li>
+                            )}
+                            </ul>
+                        );
+                        const content = props.posts.map((post) =>
+                            <div key={post.id}>
+                            <h3>{post.title}</h3>
+                            <p>{post.content}</p>
+                            </div>
+                        );
+                        return (
+                            <div>
+                            {sidebar}
+                            <hr />
+                            {content}
+                            </div>
+                        );
+                    }
+
+                    const posts = [
+                    {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+                    {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+                    ];
+                    ReactDOM.render(
+                        <Blog posts={posts} />,
+                        document.getElementById('root')
+                    );
+                    `)}
+                    codeCaption="Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique. We can use the same keys when we produce two different arrays:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Code
+                    code={this.dedent(`
+                    const content = posts.map((post) =>
+                    <Post
+                        key={post.id}
+                        id={post.id}
+                        title={post.title} />
+                    );
+                    `)}
+                    codeCaption="Keys serve as a hint to React but they don’t get passed to your components. If you need the same value in your component, pass it explicitly as a prop with a different name:"
+                />
+                <Paragraph text="With the example above, the Post component can read props.id, but not props.key." />
+                <SubSectionHeader title="Embedding map() in JSX" />
+                <Code
+                    code={this.dedent(`
+                    function NumberList(props) {
+                        const numbers = props.numbers;
+                        const listItems = numbers.map((number) =>
+                            <ListItem key={number.toString()}
+                                    value={number} />
+
+                        );
+                        return (
+                            <ul>
+                            {listItems}
+                            </ul>
+                        );
+                    }
+                    `)}
+                    codeCaption="In the examples above we declared a separate listItems variable and included it in JSX:"
+                />
+                <Code
+                    code={this.dedent(`
+                    function NumberList(props) {
+                        const numbers = props.numbers;
+                        return (
+                            <ul>
+                            {numbers.map((number) =>
                                 <ListItem key={number.toString()}
                                         value={number} />
 
-                            );
-                            return (
-                                <ul>
-                                {listItems}
-                                </ul>
-                            );
+                            )}
+                            </ul>
+                        );
+                    }
+                    `)}
+                    codeCaption="JSX allows embedding any expression in curly braces so we could inline the map() result:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="Sometimes this results in clearer code, but this style can also be abused. Like in JavaScript, it is up to you to decide whether it is worth extracting a variable for readability. Keep in mind that if the map() body is too nested, it might be a good time to extract a component." />
+            </MainSection>
+            <MainSection id="forms" className="main-section">
+                <h1>Forms</h1>
+                <Code
+                    code={this.dedent(`
+                    <form>
+                        <label>
+                            Name:
+                            <input type="text" name="name" />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                    `)}
+                    codeCaption="HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:"
+                />
+                <Paragraph text="This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called “controlled components”." />
+                <SubSectionHeader title="Controlled Components" />
+                <Paragraph text="In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState()."/>
+                <Paragraph text="We can combine the two by making the React state be the “single source of truth”. Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a “controlled component”." />
+                <Code
+                    code={this.dedent(`
+                    class NameForm extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = {value: ''};
+
+                            this.handleChange = this.handleChange.bind(this);
+                            this.handleSubmit = this.handleSubmit.bind(this);
                         }
-                        `)}
-                        codeCaption="In the examples above we declared a separate listItems variable and included it in JSX:"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        function NumberList(props) {
-                            const numbers = props.numbers;
-                            return (
-                                <ul>
-                                {numbers.map((number) =>
-                                    <ListItem key={number.toString()}
-                                            value={number} />
 
-                                )}
-                                </ul>
-                            );
-                        }
-                        `)}
-                        codeCaption="JSX allows embedding any expression in curly braces so we could inline the map() result:"
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
-                    <Paragraph text="Sometimes this results in clearer code, but this style can also be abused. Like in JavaScript, it is up to you to decide whether it is worth extracting a variable for readability. Keep in mind that if the map() body is too nested, it might be a good time to extract a component." />
-                </section>
-                <section id="forms" className="main-section">
-                    <h1>Forms</h1>
-                    <Code
-                        code={this.dedent(`
-                        <form>
-                            <label>
-                                Name:
-                                <input type="text" name="name" />
-                            </label>
-                            <input type="submit" value="Submit" />
-                        </form>
-                        `)}
-                        codeCaption="HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:"
-                    />
-                    <Paragraph text="This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called “controlled components”." />
-                    <SectionHeader title="Controlled Components" />
-                    <Paragraph text="In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState()."/>
-                    <Paragraph text="We can combine the two by making the React state be the “single source of truth”. Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a “controlled component”." />
-                    <Code
-                        code={this.dedent(`
-                        class NameForm extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.state = {value: ''};
-
-                                this.handleChange = this.handleChange.bind(this);
-                                this.handleSubmit = this.handleSubmit.bind(this);
-                            }
-
-                            handleChange(event) {
-                                this.setState({value: event.target.value});
-                            }
-
-                            handleSubmit(event) {
-                                alert('A name was submitted: ' + this.state.value);
-                                event.preventDefault();
-                            }
-
-                            render() {
-                                return (
-                                <form onSubmit={this.handleSubmit}>
-                                    <label>
-                                    Name:
-                                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                                    </label>
-                                    <input type="submit" value="Submit" />
-                                </form>
-                                );
-                            }
-                        }
-                        `)}
-                        codeCaption="For example, if we want to make the previous example log the name when it is submitted, we can write the form as a controlled component:"
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
-                    <Paragraph text="Since the value attribute is set on our form element, the displayed value will always be this.state.value, making the React state the source of truth. Since handleChange runs on every keystroke to update the React state, the displayed value will update as the user types." />
-                    <Code
-                        code={this.dedent(`
                         handleChange(event) {
-                            this.setState({value: event.target.value.toUpperCase()});
-                        }
-                        `)}
-                        codeCaption="With a controlled component, every state mutation will have an associated handler function. This makes it straightforward to modify or validate user input. For example, if we wanted to enforce that names are written with all uppercase letters, we could write handleChange as:"
-                    />
-                    <SectionHeader title="The textarea Tag" />
-                    <Code
-                        code={this.dedent(`
-                        <textarea>
-                            Hello there, this is some text in a text area
-                        </textarea>
-                        `)}
-                        codeCaption="In HTML, a <textarea> element defines its text by its children:"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        class EssayForm extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.state = {
-                                    value: 'Please write an essay about your favorite DOM element.'
-                                };
-
-                                this.handleChange = this.handleChange.bind(this);
-                                this.handleSubmit = this.handleSubmit.bind(this);
-                            }
-
-                            handleChange(event) {
-                                this.setState({value: event.target.value});
-                            }
-
-                            handleSubmit(event) {
-                                alert('An essay was submitted: ' + this.state.value);
-                                event.preventDefault();
-                            }
-
-                            render() {
-                                return (
-                                <form onSubmit={this.handleSubmit}>
-                                    <label>
-                                    Essay:
-                                    <textarea value={this.state.value} onChange={this.handleChange} />
-                                    </label>
-                                    <input type="submit" value="Submit" />
-                                </form>
-                                );
-                            }
-                        }
-                        `)}
-                        codeCaption="In React, a <textarea> uses a value attribute instead. This way, a form using a <textarea> can be written very similarly to a form that uses a single-line input:"
-                    />
-                    <Paragraph text="Notice that this.state.value is initialized in the constructor, so that the text area starts off with some text in it." />
-                    <SectionHeader title="The select Tag" />
-                    <Code
-                        code={this.dedent(`
-                        <select>
-                            <option value="grapefruit">Grapefruit</option>
-                            <option value="lime">Lime</option>
-                            <option selected value="coconut">Coconut</option>
-                            <option value="mango">Mango</option>
-                        </select>
-                        `)}
-                        codeCaption="In HTML, <select> creates a drop-down list. For example, this HTML creates a drop-down list of flavors:"
-                    />
-                    <Paragraph text="Note that the Coconut option is initially selected, because of the selected attribute. React, instead of using this selected attribute, uses a value attribute on the root select tag. This is more convenient in a controlled component because you only need to update it in one place."/>
-                    <Code
-                        code={this.dedent(`
-                        class FlavorForm extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.state = {value: 'coconut'};
-
-                                this.handleChange = this.handleChange.bind(this);
-                                this.handleSubmit = this.handleSubmit.bind(this);
-                            }
-
-                            handleChange(event) {
-                                this.setState({value: event.target.value});
-                            }
-
-                            handleSubmit(event) {
-                                alert('Your favorite flavor is: ' + this.state.value);
-                                event.preventDefault();
-                            }
-
-                            render() {
-                                return (
-                                <form onSubmit={this.handleSubmit}>
-                                    <label>
-                                    Pick your favorite flavor:
-                                    <select value={this.state.value} onChange={this.handleChange}>
-                                        <option value="grapefruit">Grapefruit</option>
-                                        <option value="lime">Lime</option>
-                                        <option value="coconut">Coconut</option>
-                                        <option value="mango">Mango</option>
-                                    </select>
-                                    </label>
-                                    <input type="submit" value="Submit" />
-                                </form>
-                                );
-                            }
-                        }
-                        `)}
-                        codeCaption="For example:"
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
-                    <Paragraph text="Overall, this makes it so that <input type='text'>, <textarea>, and <select> all work very similarly - they all accept a value attribute that you can use to implement a controlled component." />
-                    <Tip title="Note" text={["You can pass an array into the value attribute, allowing you to select multiple options in a select tag:" , <Code captionClass="no-caption" code="<select multiple={true} value={['B', 'C']}>" />]} />
-                    <SectionHeader title="The file input Tag" />
-                    <Paragraph text="In HTML, an <input type='file'> lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the File API." />
-                    <Code captionClass="no-caption" code="<input type='file' />"  />
-                    <Paragraph text="Because its value is read-only, it is an uncontrolled component in React. It is discussed together with other uncontrolled components later in the documentation." />
-                    <SectionHeader title="Handling Multiple Inputs" />
-                    <Paragraph text="When you need to handle multiple controlled input elements, you can add a name attribute to each element and let the handler function choose what to do based on the value of event.target.name." />
-                    <Code
-                        code={this.dedent(`
-                        class Reservation extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.state = {
-                                isGoing: true,
-                                numberOfGuests: 2
-                                };
-
-                                this.handleInputChange = this.handleInputChange.bind(this);
-                            }
-
-                            handleInputChange(event) {
-                                const target = event.target;
-                                const value = target.type === 'checkbox' ? target.checked : target.value;
-                                const name = target.name;
-
-                                this.setState({
-                                [name]: value
-                                });
-                            }
-
-                            render() {
-                                return (
-                                <form>
-                                    <label>
-                                    Is going:
-                                    <input
-                                        name="isGoing"
-                                        type="checkbox"
-                                        checked={this.state.isGoing}
-                                        onChange={this.handleInputChange} />
-                                    </label>
-                                    <br />
-                                    <label>
-                                    Number of guests:
-                                    <input
-                                        name="numberOfGuests"
-                                        type="number"
-                                        value={this.state.numberOfGuests}
-                                        onChange={this.handleInputChange} />
-                                    </label>
-                                </form>
-                                );
-                            }
-                        }
-                        `)}
-                        codeCaption="For example:"
-                    />
-                    <ExternalLink href="https://codepen.io/gaearon/pen/wgedvV?editors=0010" linkText="Try it on Codepen" />
-                    <Code
-                        code={this.dedent(`
-                        this.setState({
-                            [name]: value
-                        });
-                        `)}
-                        codeCaption="Note how we used the ES6 computed property name syntax to update the state key corresponding to the given input name:"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        var partialState = {};
-                        partialState[name] = value;
-                        this.setState(partialState);
-                        `)}
-                        codeCaption="It is equivalent to this ES5 code:"
-                    />
-                    <Paragraph text="Also, since setState() automatically merges a partial state into the current state, we only needed to call it with the changed parts." />
-                    <SectionHeader title="Controlled Input Null Value" />
-                    <Paragraph text="Specifying the value prop on a controlled component prevents the user from changing the input unless you desire so. If you’ve specified a value but the input is still editable, you may have accidentally set value to undefined or null." />
-                    <Code
-                        code={this.dedent(`
-                        ReactDOM.render(<input value="hi" />, mountNode);
-                        setTimeout(function() {
-                            ReactDOM.render(<input value={null} />, mountNode);
-                        }, 1000);
-                        `)}
-                        codeCaption="The following code demonstrates this. (The input is locked at first but becomes editable after a short delay.)"
-                    />
-                    <SectionHeader text="Alternatives to Controlled Components" />
-                    <Paragraph text="It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a React component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out uncontrolled components, an alternative technique for implementing input forms." />
-                </section>
-                <section id="lifting-state-up" className="main-section">
-                    <h1>Lifting State Up</h1>
-                    <Paragraph text="Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor. Let’s see how this works in action." />
-                    <Paragraph text="In this section, we will create a temperature calculator that calculates whether the water would boil at a given temperature." />
-                    <Code
-                        code={this.dedent(`
-                        function BoilingVerdict(props) {
-                            if (props.celsius >= 100) {
-                                return <p>The water would boil.</p>;
-                            }
-                            return <p>The water would not boil.</p>;
-                        }
-                        `)}
-                        codeCaption="We will start with a component called BoilingVerdict. It accepts the celsius temperature as a prop, and prints whether it is enough to boil the water:"
-                    />
-                    <Paragraph text="Next, we will create a component called Calculator. It renders an <input> that lets you enter the temperature, and keeps its value in this.state.temperature." />
-                    <Code
-                        code={this.dedent(`
-                        class Calculator extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.handleChange = this.handleChange.bind(this);
-                                this.state = {temperature: ''};
-                            }
-
-                            handleChange(e) {
-                                this.setState({temperature: e.target.value});
-                            }
-
-                            render() {
-                                const temperature = this.state.temperature;
-                                return (
-                                <fieldset>
-                                    <legend>Enter temperature in Celsius:</legend>
-                                    <input
-                                    value={temperature}
-                                    onChange={this.handleChange} />
-
-                                    <BoilingVerdict
-                                    celsius={parseFloat(temperature)} />
-
-                                </fieldset>
-                                );
-                            }
-                        }
-                        `)}
-                        codeCaption="Additionally, it renders the BoilingVerdict for the current input value."
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/ZXeOBm?editors=0010" />
-                    <SectionHeader title="Adding a Second Input" />
-                    <Paragraph text="Our new requirement is that, in addition to a Celsius input, we provide a Fahrenheit input, and they are kept in sync." />
-                    <Code
-                        code={this.dedent(`
-                        const scaleNames = {
-                            c: 'Celsius',
-                            f: 'Fahrenheit'
-                        };
-
-                        class TemperatureInput extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.handleChange = this.handleChange.bind(this);
-                                this.state = {temperature: ''};
-                            }
-
-                            handleChange(e) {
-                                this.setState({temperature: e.target.value});
-                            }
-
-                            render() {
-                                const temperature = this.state.temperature;
-                                const scale = this.props.scale;
-                                return (
-                                <fieldset>
-                                    <legend>Enter temperature in {scaleNames[scale]}:</legend>
-                                    <input value={temperature}
-                                        onChange={this.handleChange} />
-                                </fieldset>
-                                );
-                            }
-                        }
-                        `)}
-                        codeCaption="We can start by extracting a TemperatureInput component from Calculator. We will add a new scale prop to it that can either be &quot;c&quot; or &quot;f&quot;:"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        class Calculator extends React.Component {
-                            render() {
-                                return (
-                                <div>
-                                    <TemperatureInput scale="c" />
-                                    <TemperatureInput scale="f" />
-                                </div>
-                                );
-                            }
-                        }
-                        `)}
-                        codeCaption="We can now change the Calculator to render two separate temperature inputs:"
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/jGBryx?editors=0010" />
-                    <Paragraph text="We have two inputs now, but when you enter the temperature in one of them, the other doesn’t update. This contradicts our requirement: we want to keep them in sync." />
-                    <Paragraph text="We also can’t display the BoilingVerdict from Calculator. The Calculator doesn’t know the current temperature because it is hidden inside the TemperatureInput." />
-                    <SectionHeader title="Writing Conversion Functions" />
-                    <Code
-                        code={this.dedent(`
-                        function toCelsius(fahrenheit) {
-                            return (fahrenheit - 32) * 5 / 9;
+                            this.setState({value: event.target.value});
                         }
 
-                        function toFahrenheit(celsius) {
-                            return (celsius * 9 / 5) + 32;
+                        handleSubmit(event) {
+                            alert('A name was submitted: ' + this.state.value);
+                            event.preventDefault();
                         }
-                        `)}
-                        codeCaption="First, we will write two functions to convert from Celsius to Fahrenheit and back:"
-                    />
-                    <Paragraph text="These two functions convert numbers. We will write another function that takes a string temperature and a converter function as arguments and returns a string. We will use it to calculate the value of one input based on the other input." />
-                    <Code
-                        code={this.dedent(`
-                        function tryConvert(temperature, convert) {
-                            const input = parseFloat(temperature);
-                            if (Number.isNaN(input)) {
-                                return '';
-                            }
-                            const output = convert(input);
-                            const rounded = Math.round(output * 1000) / 1000;
-                            return rounded.toString();
-                        }
-                        `)}
-                        codeCaption="It returns an empty string on an invalid temperature, and it keeps the output rounded to the third decimal place:"
-                    />
-                    <Paragraph text="For example, tryConvert('abc', toCelsius) returns an empty string, and tryConvert('10.22', toFahrenheit) returns '50.396'." />
-                    <SectionHeader title="Lifting State Up" />
-                    <Code
-                        code={this.dedent(`
-                        class TemperatureInput extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.handleChange = this.handleChange.bind(this);
-                                this.state = {temperature: ''};
-                            }
 
-                            handleChange(e) {
-                                this.setState({temperature: e.target.value});
-                            }
-
-                            render() {
-                                const temperature = this.state.temperature;
-                                // ...
-                        `)}
-                        codeCaption="Currently, both TemperatureInput components independently keep their values in the local state:"
-                    />
-                    <Paragraph text="However, we want these two inputs to be in sync with each other. When we update the Celsius input, the Fahrenheit input should reflect the converted temperature, and vice versa." />
-                    <Paragraph text="In React, sharing state is accomplished by moving it up to the closest common ancestor of the components that need it. This is called “lifting state up”. We will remove the local state from the TemperatureInput and move it into the Calculator instead." />
-                    <Paragraph text="If the Calculator owns the shared state, it becomes the “source of truth” for the current temperature in both inputs. It can instruct them both to have values that are consistent with each other. Since the props of both TemperatureInput components are coming from the same parent Calculator component, the two inputs will always be in sync." />
-                    <Paragraph text="Let’s see how this works step by step." />
-                    <Code
-                        code={this.dedent(`
                         render() {
-                            // Before: const temperature = this.state.temperature;
-                            const temperature = this.props.temperature;
-                            // ...
-                        `)}
-                        codeCaption="First, we will replace this.state.temperature with this.props.temperature in the TemperatureInput component. For now, let’s pretend this.props.temperature already exists, although we will need to pass it from the Calculator in the future:"
-                    />
-                    <Paragraph text="We know that props are read-only. When the temperature was in the local state, the TemperatureInput could just call this.setState() to change it. However, now that the temperature is coming from the parent as a prop, the TemperatureInput has no control over it." />
-                    <Paragraph text="In React, this is usually solved by making a component “controlled”. Just like the DOM <input> accepts both a value and an onChange prop, so can the custom TemperatureInput accept both temperature and onTemperatureChange props from its parent Calculator." />
-                    <Code
-                        code={this.dedent(`
+                            return (
+                            <form onSubmit={this.handleSubmit}>
+                                <label>
+                                Name:
+                                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                </label>
+                                <input type="submit" value="Submit" />
+                            </form>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="For example, if we want to make the previous example log the name when it is submitted, we can write the form as a controlled component:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="Since the value attribute is set on our form element, the displayed value will always be this.state.value, making the React state the source of truth. Since handleChange runs on every keystroke to update the React state, the displayed value will update as the user types." />
+                <Code
+                    code={this.dedent(`
+                    handleChange(event) {
+                        this.setState({value: event.target.value.toUpperCase()});
+                    }
+                    `)}
+                    codeCaption="With a controlled component, every state mutation will have an associated handler function. This makes it straightforward to modify or validate user input. For example, if we wanted to enforce that names are written with all uppercase letters, we could write handleChange as:"
+                />
+                <SubSectionHeader title="The textarea Tag" />
+                <Code
+                    code={this.dedent(`
+                    <textarea>
+                        Hello there, this is some text in a text area
+                    </textarea>
+                    `)}
+                    codeCaption="In HTML, a <textarea> element defines its text by its children:"
+                />
+                <Code
+                    code={this.dedent(`
+                    class EssayForm extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = {
+                                value: 'Please write an essay about your favorite DOM element.'
+                            };
+
+                            this.handleChange = this.handleChange.bind(this);
+                            this.handleSubmit = this.handleSubmit.bind(this);
+                        }
+
+                        handleChange(event) {
+                            this.setState({value: event.target.value});
+                        }
+
+                        handleSubmit(event) {
+                            alert('An essay was submitted: ' + this.state.value);
+                            event.preventDefault();
+                        }
+
+                        render() {
+                            return (
+                            <form onSubmit={this.handleSubmit}>
+                                <label>
+                                Essay:
+                                <textarea value={this.state.value} onChange={this.handleChange} />
+                                </label>
+                                <input type="submit" value="Submit" />
+                            </form>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="In React, a <textarea> uses a value attribute instead. This way, a form using a <textarea> can be written very similarly to a form that uses a single-line input:"
+                />
+                <Paragraph text="Notice that this.state.value is initialized in the constructor, so that the text area starts off with some text in it." />
+                <SubSectionHeader title="The select Tag" />
+                <Code
+                    code={this.dedent(`
+                    <select>
+                        <option value="grapefruit">Grapefruit</option>
+                        <option value="lime">Lime</option>
+                        <option selected value="coconut">Coconut</option>
+                        <option value="mango">Mango</option>
+                    </select>
+                    `)}
+                    codeCaption="In HTML, <select> creates a drop-down list. For example, this HTML creates a drop-down list of flavors:"
+                />
+                <Paragraph text="Note that the Coconut option is initially selected, because of the selected attribute. React, instead of using this selected attribute, uses a value attribute on the root select tag. This is more convenient in a controlled component because you only need to update it in one place."/>
+                <Code
+                    code={this.dedent(`
+                    class FlavorForm extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = {value: 'coconut'};
+
+                            this.handleChange = this.handleChange.bind(this);
+                            this.handleSubmit = this.handleSubmit.bind(this);
+                        }
+
+                        handleChange(event) {
+                            this.setState({value: event.target.value});
+                        }
+
+                        handleSubmit(event) {
+                            alert('Your favorite flavor is: ' + this.state.value);
+                            event.preventDefault();
+                        }
+
+                        render() {
+                            return (
+                            <form onSubmit={this.handleSubmit}>
+                                <label>
+                                Pick your favorite flavor:
+                                <select value={this.state.value} onChange={this.handleChange}>
+                                    <option value="grapefruit">Grapefruit</option>
+                                    <option value="lime">Lime</option>
+                                    <option value="coconut">Coconut</option>
+                                    <option value="mango">Mango</option>
+                                </select>
+                                </label>
+                                <input type="submit" value="Submit" />
+                            </form>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="For example:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/vXdGmd?editors=0010" />
+                <Paragraph text="Overall, this makes it so that <input type='text'>, <textarea>, and <select> all work very similarly - they all accept a value attribute that you can use to implement a controlled component." />
+                <Tip title="Note" text={["You can pass an array into the value attribute, allowing you to select multiple options in a select tag:" , <Code captionClass="no-caption" code="<select multiple={true} value={['B', 'C']}>" />]} />
+                <SubSectionHeader title="The file input Tag" />
+                <Paragraph text="In HTML, an <input type='file'> lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the File API." />
+                <Code captionClass="no-caption" code="<input type='file' />"  />
+                <Paragraph text="Because its value is read-only, it is an uncontrolled component in React. It is discussed together with other uncontrolled components later in the documentation." />
+                <SubSectionHeader title="Handling Multiple Inputs" />
+                <Paragraph text="When you need to handle multiple controlled input elements, you can add a name attribute to each element and let the handler function choose what to do based on the value of event.target.name." />
+                <Code
+                    code={this.dedent(`
+                    class Reservation extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = {
+                            isGoing: true,
+                            numberOfGuests: 2
+                            };
+
+                            this.handleInputChange = this.handleInputChange.bind(this);
+                        }
+
+                        handleInputChange(event) {
+                            const target = event.target;
+                            const value = target.type === 'checkbox' ? target.checked : target.value;
+                            const name = target.name;
+
+                            this.setState({
+                            [name]: value
+                            });
+                        }
+
+                        render() {
+                            return (
+                            <form>
+                                <label>
+                                Is going:
+                                <input
+                                    name="isGoing"
+                                    type="checkbox"
+                                    checked={this.state.isGoing}
+                                    onChange={this.handleInputChange} />
+                                </label>
+                                <br />
+                                <label>
+                                Number of guests:
+                                <input
+                                    name="numberOfGuests"
+                                    type="number"
+                                    value={this.state.numberOfGuests}
+                                    onChange={this.handleInputChange} />
+                                </label>
+                            </form>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="For example:"
+                />
+                <ExternalLink href="https://codepen.io/gaearon/pen/wgedvV?editors=0010" linkText="Try it on Codepen" />
+                <Code
+                    code={this.dedent(`
+                    this.setState({
+                        [name]: value
+                    });
+                    `)}
+                    codeCaption="Note how we used the ES6 computed property name syntax to update the state key corresponding to the given input name:"
+                />
+                <Code
+                    code={this.dedent(`
+                    var partialState = {};
+                    partialState[name] = value;
+                    this.setState(partialState);
+                    `)}
+                    codeCaption="It is equivalent to this ES5 code:"
+                />
+                <Paragraph text="Also, since setState() automatically merges a partial state into the current state, we only needed to call it with the changed parts." />
+                <SubSectionHeader title="Controlled Input Null Value" />
+                <Paragraph text="Specifying the value prop on a controlled component prevents the user from changing the input unless you desire so. If you’ve specified a value but the input is still editable, you may have accidentally set value to undefined or null." />
+                <Code
+                    code={this.dedent(`
+                    ReactDOM.render(<input value="hi" />, mountNode);
+                    setTimeout(function() {
+                        ReactDOM.render(<input value={null} />, mountNode);
+                    }, 1000);
+                    `)}
+                    codeCaption="The following code demonstrates this. (The input is locked at first but becomes editable after a short delay.)"
+                />
+                <SubSectionHeader text="Alternatives to Controlled Components" />
+                <Paragraph text="It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a React component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out uncontrolled components, an alternative technique for implementing input forms." />
+            </MainSection>
+            <MainSection id="lifting-state-up" className="main-section">
+                <h1>Lifting State Up</h1>
+                <Paragraph text="Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor. Let’s see how this works in action." />
+                <Paragraph text="In this section, we will create a temperature calculator that calculates whether the water would boil at a given temperature." />
+                <Code
+                    code={this.dedent(`
+                    function BoilingVerdict(props) {
+                        if (props.celsius >= 100) {
+                            return <p>The water would boil.</p>;
+                        }
+                        return <p>The water would not boil.</p>;
+                    }
+                    `)}
+                    codeCaption="We will start with a component called BoilingVerdict. It accepts the celsius temperature as a prop, and prints whether it is enough to boil the water:"
+                />
+                <Paragraph text="Next, we will create a component called Calculator. It renders an <input> that lets you enter the temperature, and keeps its value in this.state.temperature." />
+                <Code
+                    code={this.dedent(`
+                    class Calculator extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.handleChange = this.handleChange.bind(this);
+                            this.state = {temperature: ''};
+                        }
+
                         handleChange(e) {
-                            // Before: this.setState({temperature: e.target.value});
-                            this.props.onTemperatureChange(e.target.value);
+                            this.setState({temperature: e.target.value});
+                        }
+
+                        render() {
+                            const temperature = this.state.temperature;
+                            return (
+                            <fieldset>
+                                <legend>Enter temperature in Celsius:</legend>
+                                <input
+                                value={temperature}
+                                onChange={this.handleChange} />
+
+                                <BoilingVerdict
+                                celsius={parseFloat(temperature)} />
+
+                            </fieldset>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="Additionally, it renders the BoilingVerdict for the current input value."
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/ZXeOBm?editors=0010" />
+                <SubSectionHeader title="Adding a Second Input" />
+                <Paragraph text="Our new requirement is that, in addition to a Celsius input, we provide a Fahrenheit input, and they are kept in sync." />
+                <Code
+                    code={this.dedent(`
+                    const scaleNames = {
+                        c: 'Celsius',
+                        f: 'Fahrenheit'
+                    };
+
+                    class TemperatureInput extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.handleChange = this.handleChange.bind(this);
+                            this.state = {temperature: ''};
+                        }
+
+                        handleChange(e) {
+                            this.setState({temperature: e.target.value});
+                        }
+
+                        render() {
+                            const temperature = this.state.temperature;
+                            const scale = this.props.scale;
+                            return (
+                            <fieldset>
+                                <legend>Enter temperature in {scaleNames[scale]}:</legend>
+                                <input value={temperature}
+                                    onChange={this.handleChange} />
+                            </fieldset>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="We can start by extracting a TemperatureInput component from Calculator. We will add a new scale prop to it that can either be &quot;c&quot; or &quot;f&quot;:"
+                />
+                <Code
+                    code={this.dedent(`
+                    class Calculator extends React.Component {
+                        render() {
+                            return (
+                            <div>
+                                <TemperatureInput scale="c" />
+                                <TemperatureInput scale="f" />
+                            </div>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="We can now change the Calculator to render two separate temperature inputs:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/jGBryx?editors=0010" />
+                <Paragraph text="We have two inputs now, but when you enter the temperature in one of them, the other doesn’t update. This contradicts our requirement: we want to keep them in sync." />
+                <Paragraph text="We also can’t display the BoilingVerdict from Calculator. The Calculator doesn’t know the current temperature because it is hidden inside the TemperatureInput." />
+                <SubSectionHeader title="Writing Conversion Functions" />
+                <Code
+                    code={this.dedent(`
+                    function toCelsius(fahrenheit) {
+                        return (fahrenheit - 32) * 5 / 9;
+                    }
+
+                    function toFahrenheit(celsius) {
+                        return (celsius * 9 / 5) + 32;
+                    }
+                    `)}
+                    codeCaption="First, we will write two functions to convert from Celsius to Fahrenheit and back:"
+                />
+                <Paragraph text="These two functions convert numbers. We will write another function that takes a string temperature and a converter function as arguments and returns a string. We will use it to calculate the value of one input based on the other input." />
+                <Code
+                    code={this.dedent(`
+                    function tryConvert(temperature, convert) {
+                        const input = parseFloat(temperature);
+                        if (Number.isNaN(input)) {
+                            return '';
+                        }
+                        const output = convert(input);
+                        const rounded = Math.round(output * 1000) / 1000;
+                        return rounded.toString();
+                    }
+                    `)}
+                    codeCaption="It returns an empty string on an invalid temperature, and it keeps the output rounded to the third decimal place:"
+                />
+                <Paragraph text="For example, tryConvert('abc', toCelsius) returns an empty string, and tryConvert('10.22', toFahrenheit) returns '50.396'." />
+                <SubSectionHeader title="Lifting State Up" />
+                <Code
+                    code={this.dedent(`
+                    class TemperatureInput extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.handleChange = this.handleChange.bind(this);
+                            this.state = {temperature: ''};
+                        }
+
+                        handleChange(e) {
+                            this.setState({temperature: e.target.value});
+                        }
+
+                        render() {
+                            const temperature = this.state.temperature;
                             // ...
-                        `)}
-                        codeCaption="Now, when the TemperatureInput wants to update its temperature, it calls this.props.onTemperatureChange:"
-                    />
-                    <Tip title="Note:" text="There is no special meaning to either temperature or onTemperatureChange prop names in custom components. We could have called them anything else, like name them value and onChange which is a common convention." />
-                    <Paragraph text="The onTemperatureChange prop will be provided together with the temperature prop by the parent Calculator component. It will handle the change by modifying its own local state, thus re-rendering both inputs with the new values. We will look at the new Calculator implementation very soon." />
-                    <Code
-                        code={this.dedent(`
-                        class TemperatureInput extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.handleChange = this.handleChange.bind(this);
-                            }
-
-                            handleChange(e) {
-                                this.props.onTemperatureChange(e.target.value);
-                            }
-
-                            render() {
-                                const temperature = this.props.temperature;
-                                const scale = this.props.scale;
-                                return (
-                                <fieldset>
-                                    <legend>Enter temperature in {scaleNames[scale]}:</legend>
-                                    <input value={temperature}
-                                        onChange={this.handleChange} />
-                                </fieldset>
-                                );
-                            }
+                    `)}
+                    codeCaption="Currently, both TemperatureInput components independently keep their values in the local state:"
+                />
+                <Paragraph text="However, we want these two inputs to be in sync with each other. When we update the Celsius input, the Fahrenheit input should reflect the converted temperature, and vice versa." />
+                <Paragraph text="In React, sharing state is accomplished by moving it up to the closest common ancestor of the components that need it. This is called “lifting state up”. We will remove the local state from the TemperatureInput and move it into the Calculator instead." />
+                <Paragraph text="If the Calculator owns the shared state, it becomes the “source of truth” for the current temperature in both inputs. It can instruct them both to have values that are consistent with each other. Since the props of both TemperatureInput components are coming from the same parent Calculator component, the two inputs will always be in sync." />
+                <Paragraph text="Let’s see how this works step by step." />
+                <Code
+                    code={this.dedent(`
+                    render() {
+                        // Before: const temperature = this.state.temperature;
+                        const temperature = this.props.temperature;
+                        // ...
+                    `)}
+                    codeCaption="First, we will replace this.state.temperature with this.props.temperature in the TemperatureInput component. For now, let’s pretend this.props.temperature already exists, although we will need to pass it from the Calculator in the future:"
+                />
+                <Paragraph text="We know that props are read-only. When the temperature was in the local state, the TemperatureInput could just call this.setState() to change it. However, now that the temperature is coming from the parent as a prop, the TemperatureInput has no control over it." />
+                <Paragraph text="In React, this is usually solved by making a component “controlled”. Just like the DOM <input> accepts both a value and an onChange prop, so can the custom TemperatureInput accept both temperature and onTemperatureChange props from its parent Calculator." />
+                <Code
+                    code={this.dedent(`
+                    handleChange(e) {
+                        // Before: this.setState({temperature: e.target.value});
+                        this.props.onTemperatureChange(e.target.value);
+                        // ...
+                    `)}
+                    codeCaption="Now, when the TemperatureInput wants to update its temperature, it calls this.props.onTemperatureChange:"
+                />
+                <Tip title="Note:" text="There is no special meaning to either temperature or onTemperatureChange prop names in custom components. We could have called them anything else, like name them value and onChange which is a common convention." />
+                <Paragraph text="The onTemperatureChange prop will be provided together with the temperature prop by the parent Calculator component. It will handle the change by modifying its own local state, thus re-rendering both inputs with the new values. We will look at the new Calculator implementation very soon." />
+                <Code
+                    code={this.dedent(`
+                    class TemperatureInput extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.handleChange = this.handleChange.bind(this);
                         }
-                        `)}
-                        codeCaption="Before diving into the changes in the Calculator, let’s recap our changes to the TemperatureInput component. We have removed the local state from it, and instead of reading this.state.temperature, we now read this.props.temperature. Instead of calling this.setState() when we want to make a change, we now call this.props.onTemperatureChange(), which will be provided by the Calculator:"
-                    />
-                    <Paragraph text="Now let’s turn to the Calculator component." />
-                    <Paragraph text="We will store the current input’s temperature and scale in its local state. This is the state we “lifted up” from the inputs, and it will serve as the “source of truth” for both of them. It is the minimal representation of all the data we need to know in order to render both inputs." />
-                    <Code
-                        code={this.dedent(`
-                        {
-                            temperature: '37',
-                            scale: 'c'
+
+                        handleChange(e) {
+                            this.props.onTemperatureChange(e.target.value);
                         }
-                        `)}
-                        codeCaption="For example, if we enter 37 into the Celsius input, the state of the Calculator component will be:"
-                    />
-                    <Code
-                        code={this.dedent(`
-                        {
-                            temperature: '212',
-                            scale: 'f'
+
+                        render() {
+                            const temperature = this.props.temperature;
+                            const scale = this.props.scale;
+                            return (
+                            <fieldset>
+                                <legend>Enter temperature in {scaleNames[scale]}:</legend>
+                                <input value={temperature}
+                                    onChange={this.handleChange} />
+                            </fieldset>
+                            );
                         }
-                        `)}
-                        codeCaption="If we later edit the Fahrenheit field to be 212, the state of the Calculator will be:"
-                    />
-                    <Paragraph text="We could have stored the value of both inputs but it turns out to be unnecessary. It is enough to store the value of the most recently changed input, and the scale that it represents. We can then infer the value of the other input based on the current temperature and scale alone." />
-                    <Code
-                        code={this.dedent(`
-                        class Calculator extends React.Component {
-                            constructor(props) {
-                                super(props);
-                                this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
-                                this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
-                                this.state = {temperature: '', scale: 'c'};
-                            }
-
-                            handleCelsiusChange(temperature) {
-                                this.setState({scale: 'c', temperature});
-                            }
-
-                            handleFahrenheitChange(temperature) {
-                                this.setState({scale: 'f', temperature});
-                            }
-
-                            render() {
-                                const scale = this.state.scale;
-                                const temperature = this.state.temperature;
-                                const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
-                                const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
-
-                                return (
-                                <div>
-                                    <TemperatureInput
-                                    scale="c"
-                                    temperature={celsius}
-                                    onTemperatureChange={this.handleCelsiusChange} />
-
-                                    <TemperatureInput
-                                    scale="f"
-                                    temperature={fahrenheit}
-                                    onTemperatureChange={this.handleFahrenheitChange} />
-
-                                    <BoilingVerdict
-                                    celsius={parseFloat(celsius)} />
-
-                                </div>
-                                );
-                            }
+                    }
+                    `)}
+                    codeCaption="Before diving into the changes in the Calculator, let’s recap our changes to the TemperatureInput component. We have removed the local state from it, and instead of reading this.state.temperature, we now read this.props.temperature. Instead of calling this.setState() when we want to make a change, we now call this.props.onTemperatureChange(), which will be provided by the Calculator:"
+                />
+                <Paragraph text="Now let’s turn to the Calculator component." />
+                <Paragraph text="We will store the current input’s temperature and scale in its local state. This is the state we “lifted up” from the inputs, and it will serve as the “source of truth” for both of them. It is the minimal representation of all the data we need to know in order to render both inputs." />
+                <Code
+                    code={this.dedent(`
+                    {
+                        temperature: '37',
+                        scale: 'c'
+                    }
+                    `)}
+                    codeCaption="For example, if we enter 37 into the Celsius input, the state of the Calculator component will be:"
+                />
+                <Code
+                    code={this.dedent(`
+                    {
+                        temperature: '212',
+                        scale: 'f'
+                    }
+                    `)}
+                    codeCaption="If we later edit the Fahrenheit field to be 212, the state of the Calculator will be:"
+                />
+                <Paragraph text="We could have stored the value of both inputs but it turns out to be unnecessary. It is enough to store the value of the most recently changed input, and the scale that it represents. We can then infer the value of the other input based on the current temperature and scale alone." />
+                <Code
+                    code={this.dedent(`
+                    class Calculator extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+                            this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+                            this.state = {temperature: '', scale: 'c'};
                         }
-                        `)}
-                        codeCaption="The inputs stay in sync because their values are computed from the same state:"
-                    />
-                    <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/WZpxpz?editors=0010" />
-                    <Paragraph text="Now, no matter which input you edit, this.state.temperature and this.state.scale in the Calculator get updated. One of the inputs gets the value as is, so any user input is preserved, and the other input value is always recalculated based on it." />
-                    <List title="Let’s recap what happens when you edit an input:"
-                        listItems=
-                        {["React calls the function specified as onChange on the DOM <input>. In our case, this is the handleChange method in TemperatureInput component.",
-                            "The handleChange method in the TemperatureInput component calls this.props.onTemperatureChange() with the new desired value. Its props, including onTemperatureChange, were provided by its parent component, the Calculator.",
-                            "When it previously rendered, the Calculator has specified that onTemperatureChange of the Celsius TemperatureInput is the Calculator’s handleCelsiusChange method, and onTemperatureChange of the Fahrenheit TemperatureInput is the Calculator’s handleFahrenheitChange method. So either of these two Calculator methods gets called depending on which input we edited.",
-                            "Inside these methods, the Calculator component asks React to re-render itself by calling this.setState() with the new input value and the current scale of the input we just edited.",
-                            "React calls the Calculator component’s render method to learn what the UI should look like. The values of both inputs are recomputed based on the current temperature and the active scale. The temperature conversion is performed here.",
-                            "React calls the render methods of the individual TemperatureInput components with their new props specified by the Calculator. It learns what their UI should look like.",
-                            "React DOM updates the DOM to match the desired input values. The input we just edited receives its current value, and the other input is updated to the temperature after conversion." ]} />
-                    <Paragraph text="Every update goes through the same steps so the inputs stay in sync."/>
-                    <SectionHeader title="Lessons Learned" />
-                    <Paragraph text="There should be a single “source of truth” for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the top-down data flow." />
-                    <Paragraph text="Lifting state involves writing more “boilerplate” code than two-way binding approaches, but as a benefit, it takes less work to find and isolate bugs. Since any state “lives” in some component and that component alone can change it, the surface area for bugs is greatly reduced. Additionally, you can implement any custom logic to reject or transform user input." />
-                    <Paragraph text="If something can be derived from either props or state, it probably shouldn’t be in the state. For example, instead of storing both celsiusValue and fahrenheitValue, we store just the last edited temperature and its scale. The value of the other input can always be calculated from them in the render() method. This lets us clear or apply rounding to the other field without losing any precision in the user input." />
-                    <Paragraph text="When you see something wrong in the UI, you can use React Developer Tools to inspect the props and move up the tree until you find the component responsible for updating the state. This lets you trace the bugs to their source:"/>
-                </section>
-                <section id="composition-vs-inheritance" className="main-section">
-                    <h1>Composition vs Inheritance</h1>
-                    <Paragraph text="In this section, we will consider a few problems where developers new to React often reach for inheritance, and show how we can solve them with composition." />
-                    <Paragraph text="React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components." />
-                    <SectionHeader title="Containment" />
-                </section>
-           </section>
+
+                        handleCelsiusChange(temperature) {
+                            this.setState({scale: 'c', temperature});
+                        }
+
+                        handleFahrenheitChange(temperature) {
+                            this.setState({scale: 'f', temperature});
+                        }
+
+                        render() {
+                            const scale = this.state.scale;
+                            const temperature = this.state.temperature;
+                            const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
+                            const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+
+                            return (
+                            <div>
+                                <TemperatureInput
+                                scale="c"
+                                temperature={celsius}
+                                onTemperatureChange={this.handleCelsiusChange} />
+
+                                <TemperatureInput
+                                scale="f"
+                                temperature={fahrenheit}
+                                onTemperatureChange={this.handleFahrenheitChange} />
+
+                                <BoilingVerdict
+                                celsius={parseFloat(celsius)} />
+
+                            </div>
+                            );
+                        }
+                    }
+                    `)}
+                    codeCaption="The inputs stay in sync because their values are computed from the same state:"
+                />
+                <ExternalLink linkText="Try it on CodePen" href="https://codepen.io/gaearon/pen/WZpxpz?editors=0010" />
+                <Paragraph text="Now, no matter which input you edit, this.state.temperature and this.state.scale in the Calculator get updated. One of the inputs gets the value as is, so any user input is preserved, and the other input value is always recalculated based on it." />
+                <List title="Let’s recap what happens when you edit an input:"
+                    listItems=
+                    {["React calls the function specified as onChange on the DOM <input>. In our case, this is the handleChange method in TemperatureInput component.",
+                        "The handleChange method in the TemperatureInput component calls this.props.onTemperatureChange() with the new desired value. Its props, including onTemperatureChange, were provided by its parent component, the Calculator.",
+                        "When it previously rendered, the Calculator has specified that onTemperatureChange of the Celsius TemperatureInput is the Calculator’s handleCelsiusChange method, and onTemperatureChange of the Fahrenheit TemperatureInput is the Calculator’s handleFahrenheitChange method. So either of these two Calculator methods gets called depending on which input we edited.",
+                        "Inside these methods, the Calculator component asks React to re-render itself by calling this.setState() with the new input value and the current scale of the input we just edited.",
+                        "React calls the Calculator component’s render method to learn what the UI should look like. The values of both inputs are recomputed based on the current temperature and the active scale. The temperature conversion is performed here.",
+                        "React calls the render methods of the individual TemperatureInput components with their new props specified by the Calculator. It learns what their UI should look like.",
+                        "React DOM updates the DOM to match the desired input values. The input we just edited receives its current value, and the other input is updated to the temperature after conversion." ]} />
+                <Paragraph text="Every update goes through the same steps so the inputs stay in sync."/>
+                <SubSectionHeader title="Lessons Learned" />
+                <Paragraph text="There should be a single “source of truth” for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the top-down data flow." />
+                <Paragraph text="Lifting state involves writing more “boilerplate” code than two-way binding approaches, but as a benefit, it takes less work to find and isolate bugs. Since any state “lives” in some component and that component alone can change it, the surface area for bugs is greatly reduced. Additionally, you can implement any custom logic to reject or transform user input." />
+                <Paragraph text="If something can be derived from either props or state, it probably shouldn’t be in the state. For example, instead of storing both celsiusValue and fahrenheitValue, we store just the last edited temperature and its scale. The value of the other input can always be calculated from them in the render() method. This lets us clear or apply rounding to the other field without losing any precision in the user input." />
+                <Paragraph text="When you see something wrong in the UI, you can use React Developer Tools to inspect the props and move up the tree until you find the component responsible for updating the state. This lets you trace the bugs to their source:"/>
+            </MainSection>
+            <MainSection id="composition-vs-inheritance" className="main-section">
+                <h1>Composition vs Inheritance</h1>
+                <Paragraph text="In this section, we will consider a few problems where developers new to React often reach for inheritance, and show how we can solve them with composition." />
+                <Paragraph text="React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components." />
+                <SubSectionHeader title="Containment" />
+                <Paragraph text="Some components don’t know their children ahead of time. This is especially common for components like Sidebar or Dialog that represent generic “boxes”."/>
+                <Code
+                    code={this.dedent(`
+                    function FancyBorder(props) {
+                        return (
+                            <div className={'FancyBorder FancyBorder-' + props.color}>
+                            {props.children}
+                            </div>
+                        );
+                    }
+                    `)}
+                    codeCaption="We recommend that such components use the special children prop to pass children elements directly into their output:"
+                />
+                <Code
+                    code={this.dedent(`
+                    function WelcomeDialog() {
+                        return (
+                            <FancyBorder color="blue">
+                            <h1 className="Dialog-title">
+                                Welcome
+                            </h1>
+                            <p className="Dialog-message">
+                                Thank you for visiting our spacecraft!
+                            </p>
+                            </FancyBorder>
+                        );
+                    }
+                    `)}
+                    codeCaption="This lets other components pass arbitrary children to them by nesting the JSX:"
+                />
+            </MainSection>
         </main>
       </div>
     );

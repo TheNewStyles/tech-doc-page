@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-import '../styles/SectionHeader.css';
+import '../styles/SubSectionHeader.css';
 
-class SectionHeader extends Component {
+class SubSectionHeader extends Component {
     render() {
       return (
         <header>
             <h3 id={this.props.id}>
                 {this.props.title}
-            </h3>            
+            </h3>
         </header>
         );
     }
 }
 
-export default SectionHeader; 
+export default SubSectionHeader;
